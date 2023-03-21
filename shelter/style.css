@@ -1,0 +1,144 @@
+@import url(reset.css);
+
+@font-face {
+  font-family: Georgia;
+  src: url(./assets/fonts/Georgia.ttf);
+}
+@font-face {
+  font-family: Arial;
+  src: url(./assets/fonts/ArialMT.ttf);
+}
+
+.container {
+  max-width: 1280px;
+  padding: 0 40px;
+  margin: 0 auto;
+}
+
+.header {
+  background-image: url(./assets/header/start-screen-background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header__content {
+  margin: 0 auto;
+  max-width: 1280px;
+  background: url(./assets/header/noise_transparent@2x.png),
+    radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%) #211f20;
+  border: 1px solid #000000;
+  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+  margin-bottom: 88px;
+  align-items: center;
+}
+
+.logo__title {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 110%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.06em;
+  color: #f1cdb3;
+  margin-bottom: 10px;
+}
+
+.logo__subtitle {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  margin-left: 5px;
+}
+
+.nav {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+}
+
+.nav__links {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 35px;
+}
+
+.nav__link {
+  position: relative;
+  color: #cdcdcd;
+  margin-bottom: 6px;
+}
+
+.nav__link:hover,
+.nav__link.active {
+  color: #fafafa;
+}
+
+.nav__link.active::after,
+.nav__link:hover::after {
+  color: red;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 3px;
+  background-color: #f1cdb3;
+}
+
+.start {
+  display: flex;
+  justify-content: space-between;
+}
+
+.start__description {
+  margin-top: 164px;
+  max-width: 460px;
+  text-align: start;
+}
+
+.start__title {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 130%;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+.start__text {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  color: #cdcdcd;
+  margin-bottom: 42px;
+}
+
+.fill__button {
+  background: #f1cdb3;
+  border-radius: 100px;
+  padding: 15px 45px;
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: #292929;
+}
