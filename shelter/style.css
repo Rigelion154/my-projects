@@ -130,8 +130,7 @@
   margin-bottom: 42px;
 }
 
-.fill__button {
-  background: #f1cdb3;
+.button {
   border-radius: 100px;
   padding: 15px 45px;
   font-family: "Georgia";
@@ -141,4 +140,156 @@
   line-height: 130%;
   letter-spacing: 0.06em;
   color: #292929;
+}
+
+.fill__button {
+  background: #f1cdb3;
+  color: #292929;
+}
+
+.frame__button {
+  border: 2px solid #f1cdb3;
+}
+
+.fill__button:hover {
+  background: #fddcc4;
+}
+
+.frame__button:hover {
+  background: #fddcc4;
+}
+
+.about__content {
+  display: flex;
+  justify-content: space-between;
+  padding: 80px 175px 100px;
+}
+
+.about__descriptions {
+  max-width: 430px;
+  padding-top: 14px;
+}
+
+h2 {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: #545454;
+}
+
+.about__text {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  color: #4c4c4c;
+  margin-top: 25px;
+}
+
+.pets {
+  background-color: #f6f6f6;
+}
+
+.pets__content {
+  padding: 80px 0 100px;
+  text-align: center;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+
+.pets__title {
+  margin-bottom: 60px;
+}
+
+.slider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 57px;
+}
+
+.slider__arrow {
+  border: 2px solid #f1cdb3;
+  border-radius: 100px;
+  padding: 23px 19px;
+  cursor: pointer;
+}
+
+.slider__arrow:hover {
+  background: #fddcc4;
+}
+
+.slider__card + .slider__card {
+  margin-left: 90px;
+}
+
+.arrow-left {
+  margin-right: 53px;
+}
+
+.arrow-right {
+  margin-left: 53px;
+}
+
+.slider__card {
+  background: #fafafa;
+  border-radius: 9px;
+  padding: 0 0 30px 0;
+}
+
+.slider__title {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.06em;
+  color: #545454;
+  margin: 30px 0;
+}
+
+.help__first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 120px;
+  padding: 0 85px;
+  margin-bottom: 57px;
+}
+
+.help__second-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 120px;
+  padding: 0 169px;
+}
+
+.help__content {
+  text-align: center;
+  padding: 80px 0 100px;
+}
+
+.help__title {
+  margin-bottom: 60px;
+}
+
+.help__image {
+  margin-bottom: 30px;
+}
+
+.help__card-title {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  text-align: center;
+  letter-spacing: 0.06em;
+  color: #545454;
 }
