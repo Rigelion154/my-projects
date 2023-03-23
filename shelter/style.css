@@ -102,11 +102,11 @@ html {
   color: #545454;
 }
 
-/* .nav__link:hover,
+.nav__link:hover,
 .nav__link.active {
   color: #fafafa;
   transition: 0.7s ease;
-} */
+}
 
 .nav__link-pets:hover,
 .nav__link-pets.active {
@@ -199,12 +199,14 @@ html {
   border: 2px solid #f1cdb3;
 }
 
-.fill__button:hover {
+.fill__button:hover,
+.number:hover {
   background: #fddcc4;
   transition: 0.5s ease;
 }
 
-.frame__button:hover {
+.frame__button:hover,
+.right:hover {
   background: #fddcc4;
   border: 2px solid #fddcc4;
   transition: 0.5s ease;
@@ -235,19 +237,20 @@ html {
 }
 
 .double {
-  padding: 14px 15px 13px 12px;
+  padding: 11px 15px 13px 10px;
 }
 .ones {
-  padding: 14px 20px 15px 19px;
+  padding: 11px 20px 15px 17px;
 }
 
 .number {
-  padding: 14px 22px 15px 21px;
+  padding: 11px 22px 15px 20px;
 }
 
-.left {
+li > a.left {
   border: 2px solid #cdcdcd;
   color: #cdcdcd;
+  pointer-events: none;
 }
 .right {
   border: 2px solid #f1cdb3;
@@ -269,7 +272,8 @@ html {
   padding-top: 14px;
 }
 
-h2 {
+h2,
+.pets__title {
   font-family: "Georgia";
   font-style: normal;
   font-weight: 400;
@@ -454,6 +458,7 @@ h2 {
   line-height: 115%;
   letter-spacing: 0.06em;
   color: #545454;
+  padding: 9px 14px;
 }
 
 .button__image {
