@@ -99,6 +99,10 @@ html {
   margin-bottom: 6px;
 }
 
+.active {
+  pointer-events: none;
+}
+
 .nav__link-pets {
   color: #545454;
 }
