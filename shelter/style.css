@@ -1,5 +1,4 @@
 @import url(reset.css);
-@import url(media.css);
 
 @font-face {
   font-family: Georgia;
@@ -137,6 +136,19 @@ html {
 
 .nav__link:hover::after {
   transform: scaleX(1);
+}
+
+.burger {
+  background: none;
+  width: 30px;
+  height: 22px;
+  align-items: center;
+  cursor: pointer;
+  display: none;
+}
+
+.burger-menu {
+  display: none;
 }
 
 .start {
@@ -368,16 +380,17 @@ h2,
 .help__cards {
   display: flex;
   align-items: center;
-  margin-left: 90px;
-  max-width: 1026px;
+  justify-content: center;
+  /* margin-left: 90px;
+  max-width: 1026px; */
   flex-wrap: wrap;
   column-gap: 119px;
   row-gap: 56px;
 }
 
-.help__card:nth-child(6) {
+/* .help__card:nth-child(6) {
   margin-left: 82px;
-}
+} */
 
 .help__title {
   margin-bottom: 60px;
@@ -488,6 +501,7 @@ h2,
   line-height: 130%;
   letter-spacing: 0.06em;
   color: #ffffff;
+  max-width: 279px;
 }
 
 .footer__link {
@@ -529,12 +543,12 @@ h2,
   display: flex;
   flex-direction: column;
   margin-bottom: 49px;
+  margin-right: 10px;
 }
 
 .footer__locations-title {
   margin-bottom: 32px;
-
-  margin-right: 37px;
+  max-width: 270px;
 }
 
 .location__link {
@@ -671,19 +685,17 @@ h2,
   }
 
   .help__cards {
-    margin-left: 40px;
     row-gap: 53px;
   }
   .donation__content {
     flex-direction: column-reverse;
     padding: 82px 30px 89px;
+    align-items: center;
   }
   .donation__image {
     max-width: 505px;
-    margin-left: 70px;
   }
   .donation__descriprion {
-    margin-left: 134px;
     margin-bottom: 53px;
     max-width: 380px;
   }
@@ -694,5 +706,208 @@ h2,
     align-items: center;
     column-gap: 60px;
     row-gap: 20px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+  .container {
+    padding: 0 5px;
+  }
+  .header__wrapper {
+    margin-bottom: 29px;
+    padding: 30px 13px;
+  }
+  .nav {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .burger-menu {
+    position: relative;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: #f1cdb3;
+  }
+  .burger-menu::before {
+    content: "";
+
+    bottom: 10px;
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: #f1cdb3;
+  }
+  .burger-menu::after {
+    content: "";
+    top: 10px;
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: #f1cdb3;
+  }
+  .start__description {
+    text-align: center;
+  }
+  .start__title {
+    font-size: 25px;
+    letter-spacing: 0.06em;
+  }
+
+  .start__text {
+    max-width: 300px;
+  }
+  .start__button {
+    margin-left: 0px;
+  }
+  .start__image {
+    max-width: 260px;
+    margin-left: 40px;
+  }
+
+  .start__button {
+    margin-bottom: 106px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+
+  .about__content {
+    padding: 27px 12px 41px;
+  }
+  .about__descriptions {
+    margin-bottom: 38px;
+  }
+  .about__image {
+    max-width: 260px;
+  }
+
+  .about__text {
+    max-width: 270px;
+    margin-top: 24px;
+    text-align: justify;
+  }
+
+  .about__title {
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  .pets__content {
+    padding: 44px 0 42px;
+  }
+  .pets__title {
+    margin-bottom: 42px;
+    font-size: 25px;
+  }
+
+  .slider__card:nth-child(3) {
+    display: none;
+  }
+  .slider {
+    justify-content: center;
+    margin-bottom: 114px;
+    position: relative;
+  }
+  .slider__arrow {
+    position: absolute;
+  }
+  .arrow-left {
+    bottom: -17%;
+
+    left: 20%;
+  }
+  .arrow-right {
+    bottom: -17%;
+
+    right: 20%;
+  }
+  .help__content {
+    padding: 42px 10px 42px;
+  }
+
+  .help__card {
+    min-width: 130px;
+    max-height: 87px;
+  }
+  .help__title {
+    margin-bottom: 40px;
+    font-size: 25px;
+  }
+  .help__image {
+    margin-bottom: 20px;
+    max-width: 50px;
+    max-height: 50px;
+  }
+  .help__card-title {
+    font-size: 15px;
+  }
+  .help__cards {
+    column-gap: 30px;
+    row-gap: 30px;
+    justify-content: flex-start;
+  }
+
+  .donation__content {
+    text-align: center;
+    padding: 42px 0px 42px;
+  }
+  .donation__descriprion {
+    margin-bottom: 42px;
+  }
+  .donation__button {
+    font-size: 15px;
+    line-height: 150%;
+    padding: 10px 16px;
+  }
+  .donation__image {
+    max-width: 260px;
+    margin: 0 0;
+  }
+  .donation__bank {
+    line-height: 160%;
+    letter-spacing: normal;
+  }
+  .donation__bank-information {
+    text-align: justify;
+    max-width: 280px;
+  }
+
+  .footer__contacts {
+    text-align: center;
+    margin-bottom: -28px;
+  }
+  .footer__title {
+    font-size: 25px;
+  }
+
+  .footer__email {
+    margin-top: 3px;
+  }
+  .footer__locations {
+    align-items: center;
+    margin-right: 0px;
+    margin-bottom: 25px;
+  }
+
+  .footer__locations-title {
+    text-align: center;
+    margin-bottom: 39px;
+  }
+  .location {
+    margin-left: 38px;
+  }
+  .location__boston {
+    margin-bottom: 44px;
+  }
+  .footer__image {
+    max-width: 260px;
   }
 }
