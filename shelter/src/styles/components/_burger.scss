@@ -1,0 +1,44 @@
+.burger {
+  background: none;
+  width: 30px;
+  height: 22px;
+  align-items: center;
+  cursor: pointer;
+  display: none;
+}
+
+.burger-menu {
+  display: none;
+  position: relative;
+  width: 30px;
+  height: 2px;
+  background: #f1cdb3;
+}
+.burger-menu::before {
+  content: "";
+  bottom: 10px;
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: #f1cdb3;
+}
+.burger-menu::after {
+  content: "";
+  top: 10px;
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: #f1cdb3;
+}
+
+@media (max-width: 760px) {
+  .burger {
+    display: flex;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+}
