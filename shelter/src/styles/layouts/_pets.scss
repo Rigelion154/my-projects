@@ -1,0 +1,30 @@
+.pets {
+  background: #f6f6f6;
+}
+
+.pets__content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 55px;
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+
+.pets__title {
+  text-align: center;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 600px) {
+  .pets__content {
+    padding-top: 42px;
+    padding-bottom: 42px;
+    row-gap: 35px;
+  }
+  .pets__button {
+    margin-top: 75px;
+  }
+}
