@@ -129,7 +129,7 @@ window.onload = function () {
   });
 
   const onClicked = () => {
-    overlay.classList.toggle("display__block");
+    overlay.classList.remove("display__block");
     navLinks.classList.remove("open");
     navLinks.classList.add("closed");
     burger.classList.remove("burger__open");
