@@ -2,11 +2,12 @@
   background: $color-main-titles;
 }
 
-.nav {
+.header__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .logo__title {
@@ -29,7 +30,7 @@
 .nav__links {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   column-gap: 36px;
   font-family: "Arial";
   font-style: normal;
@@ -54,7 +55,7 @@
     transform-origin: left;
   }
   &:hover,
-  &.active {
+  & .active {
     color: $color-buttons;
     transition: 0.7s ease;
   }
@@ -72,13 +73,41 @@
 
 @media (max-width: 760px) {
   .nav__links {
-    display: none;
+    position: absolute;
+    right: -200%;
+    &.open {
+      position: fixed;
+      width: 320px;
+      height: 100%;
+      font-size: 3.2rem;
+      line-height: 160%;
+      top: 0;
+      right: 0;
+      background: $color-sections;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 40px;
+      z-index: 1;
+      transition: 0.5s ease;
+    }
+    &.closed {
+      position: fixed;
+      width: 320px;
+      height: 100%;
+      font-size: 3.2rem;
+      line-height: 160%;
+      top: 0;
+      right: -200%;
+      background: #292929;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 40px;
+      z-index: 1;
+      transition: 0.5s ease-in;
+    }
   }
-}
-
-@media screen and (max-width: 600px) {
-  .nav {
-    justify-content: center;
-    column-gap: 66px;
+  .header__content {
+    padding: 30px 20px 0;
+    margin-bottom: 30px;
   }
 }

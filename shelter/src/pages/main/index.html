@@ -22,7 +22,7 @@
       sizes="16x16"
       href="../../assets/icons/favicon/favicon-16x16.png"
     />
-    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <!-- <link rel="manifest" href="./assets/favicon/site.webmanifest" /> -->
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
     <title>Cozy House</title>
@@ -30,15 +30,14 @@
   <body>
     <div class="wrapper">
       <header class="header">
-        <div class="container">
+        <div class="container header__content">
+          <a href="#!">
+            <div class="logo">
+              <p class="logo__title">Cozy House</p>
+              <p class="logo__subtitle">Shelter for pets in Boston</p>
+            </div>
+          </a>
           <nav class="nav">
-            <a href="#!">
-              <div class="logo">
-                <p class="logo__title">Cozy House</p>
-                <p class="logo__subtitle">Shelter for pets in Boston</p>
-              </div>
-            </a>
-
             <ul class="nav__links">
               <li class="nav__link active">
                 <a href="#!">About the shelter</a>
@@ -49,12 +48,14 @@
               <li class="nav__link">
                 <a href="#help">Help the shelter</a>
               </li>
-              <li class="nav__link"><a href="#footer">Contacts</a></li>
+              <li class="nav__link">
+                <a class="link" href="#footer">Contacts</a>
+              </li>
             </ul>
-            <div class="burger">
-              <span class="burger-menu"></span>
-            </div>
           </nav>
+          <div class="burger">
+            <span class="burger-menu"></span>
+          </div>
         </div>
         <section class="start">
           <div class="container start__content">
@@ -123,7 +124,7 @@
                   alt="arrow"
                   class="slider__arrow arrow-left"
                 />
-                <div class="slider__card slider__card-main">
+                <div class="slider__card slider__card-main Katrine">
                   <img
                     src="../../assets/images/pets-slider/pets-katrine.png"
                     alt="Cat"
@@ -134,7 +135,7 @@
                     <button class="frame__button button">Learn more</button>
                   </div>
                 </div>
-                <div class="slider__card slider__card-main">
+                <div class="slider__card slider__card-main Jennifer">
                   <img
                     src="../../assets/images/pets-slider/pets-jenifer.png"
                     alt="Cat"
@@ -145,7 +146,7 @@
                     <button class="frame__button button">Learn more</button>
                   </div>
                 </div>
-                <div class="slider__card slider__card-main">
+                <div class="slider__card slider__card-main Woody">
                   <img
                     src="../../assets/images/pets-slider/pets-woody.png"
                     alt="Cat"
@@ -388,6 +389,37 @@
         </div>
       </footer>
     </div>
+
+    <div class="overlay"></div>
+    <div class="pop-up">
+      <div class="pop-up__body">
+        <img
+          class="pop-up__image"
+          src="../../assets/images/pets-slider/pets-jenifer.png"
+          alt="pet"
+        />
+
+        <div class="pop-up__content">
+          <div class="pop-up__header">
+            <h2 class="pop-up__title">Jennifer</h2>
+            <h3 class="pop-up__subtitle">Dog - Labrador</h3>
+          </div>
+          <p class="pop-up__text">
+            Jennifer is a sweet 2 months old Labrador that is patiently waiting
+            to find a new forever home. This girl really enjoys being able to go
+            outside to run and play, but won't hesitate to play up a storm in
+            the house if she has all of her favorite toys.
+          </p>
+          <ul class="pop-up__descriptions">
+            <li class="pop-up__age"><b>Age:</b> 2 months</li>
+            <li class="pop-up__inoculations"><b>Inoculations:</b> none</li>
+            <li class="pop-up__diseases"><b>Diseases:</b> none</li>
+            <li class="pop-up__parasites"><b>Parasites:</b> none</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <script src="index.js"></script>
   </body>
 </html>
