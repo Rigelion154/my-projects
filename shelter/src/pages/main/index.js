@@ -97,10 +97,6 @@ window.onload = function () {
       parasites: ["lice", "fleas"],
     },
   ];
-  const titles = [];
-  data.forEach((card) => {
-    titles.push(card.name);
-  });
 
   console.log(`Все пункты выполнены / 100 `);
 
@@ -129,17 +125,12 @@ window.onload = function () {
   });
 
   const onClicked = () => {
-    overlay.classList.toggle("display__block");
+    overlay.classList.remove("display__block");
     navLinks.classList.remove("open");
     navLinks.classList.add("closed");
     burger.classList.remove("burger__open");
     burger.classList.add("burger__closed");
     document.body.classList.remove("hidden");
-  };
-
-  const closePopUp = () => {
-    popUpContent.innerHTML = "";
-    popUp.classList.remove("display__block");
   };
 
   overlay.addEventListener("click", () => {
@@ -152,11 +143,13 @@ window.onload = function () {
   });
 
   // Pop - up;
+
   const slider = document.querySelector(".slider");
   const sliderCard = slider.querySelectorAll(".slider__card");
   const popUp = document.querySelector(".pop-up");
-  const popUpContent = document.querySelector(".pop-up__content");
+  // const popUpContent = document.querySelector(".pop-up__content");
   const popUpBody = document.querySelector(".pop-up__body");
+  const popUpCloseButton = document.querySelector(".pop-up__close");
 
   sliderCard.forEach((card) =>
     card.addEventListener("click", () => {
@@ -191,4 +184,14 @@ window.onload = function () {
       });
     })
   );
+
+  const closePopUp = () => {
+    popUpBody.innerHTML = "";
+    popUp.classList.remove("display__block");
+  };
+
+  popUpCloseButton.addEventListener("click", () => {
+    onClicked();
+    closePopUp();
+  });
 };
