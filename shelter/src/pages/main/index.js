@@ -336,7 +336,7 @@ const moveLeftRender = () => {
     sliderCardCenter[i].innerHTML = sliderCardLeft[i].innerHTML;
   }
   // initLeftSliderBlock();
-  // initBlocks();
+  initBlocks();
 };
 
 const moveRightRender = () => {
@@ -348,7 +348,7 @@ const moveRightRender = () => {
     sliderCardCenter[i].innerHTML = sliderCardRight[i].innerHTML;
   }
   // initRightSliderBlock();
-  // initBlocks();
+  initBlocks();
 };
 
 leftArrow.addEventListener("click", moveLeft);
@@ -384,4 +384,4 @@ slider.addEventListener("animationend", (AnimationEvent) => {
   rightArrow.addEventListener("click", moveRight);
 });
 
-slider.addEventListener("animationstart", initBlocks);
+// slider.addEventListener("animationstart", initBlocks);
