@@ -103,8 +103,9 @@ window.onload = function () {
   navLinksHandler();
   popupHandler();
   popupCloseButtonHandler();
-  initSliderCards();
-  initBlocks();
+  // initSliderCards();
+  // initBlocks();
+  initPaginationCards();
 };
 
 const burger = document.querySelector(".burger");
@@ -113,16 +114,27 @@ const overlay = document.querySelector(".overlay");
 const popUp = document.querySelector(".pop-up");
 const popUpBody = document.querySelector(".pop-up__body");
 const popUpCloseButton = document.querySelector(".pop-up__close");
-const slider = document.querySelector(".slider");
 const sliderCard = document.querySelectorAll(".slider__card");
-const sliderCenter = document.querySelector(".slider__center");
-const sliderleft = document.querySelector(".slider__left");
-const sliderRight = document.querySelector(".slider__right");
-const sliderCardCenter = sliderCenter.querySelectorAll(".slider__card");
-const sliderCardLeft = sliderleft.querySelectorAll(".slider__card");
-const sliderCardRight = sliderRight.querySelectorAll(".slider__card");
-const rightArrow = document.querySelector(".arrow-right");
-const leftArrow = document.querySelector(".arrow-left");
+const paginationOnceRight = document.querySelector(".pagination__button-right");
+const paginationOnceLeft = document.querySelector(".pagination__button-left");
+const paginationDoubleLeft = document.querySelector(
+  ".pagination__button-left-double"
+);
+const paginationDoubleRight = document.querySelector(
+  ".pagination__button-right-double"
+);
+const paginationPAGE_NUMBER = document.querySelector(
+  ".pets__pagination-center"
+);
+// const slider = document.querySelector(".slider");
+// const sliderCenter = document.querySelector(".slider__center");
+// const sliderleft = document.querySelector(".slider__left");
+// const sliderRight = document.querySelector(".slider__right");
+// const sliderCardCenter = sliderCenter.querySelectorAll(".slider__card");
+// const sliderCardLeft = sliderleft.querySelectorAll(".slider__card");
+// const sliderCardRight = sliderRight.querySelectorAll(".slider__card");
+// const rightArrow = document.querySelector(".arrow-right");
+// const leftArrow = document.querySelector(".arrow-left");
 
 //Burger
 
@@ -218,168 +230,107 @@ const closePopUp = () => {
   popUp.classList.remove("display__block");
 };
 
-//Slider
-
-const getRandomsArrays = (data) => {
-  let leftRandomArray = [];
-  let rightRandomArray = [];
-  let centerRandomArray = [];
-  let result = [];
-  for (let i = 0; i < 100; i++) {
+// Pagination
+const getRandomArray = (data) => {
+  let randomArray = [];
+  while (randomArray.length < data.length) {
     let randomElement = data[Math.floor(Math.random() * data.length)];
-    if (
-      leftRandomArray.length === 3 &&
-      rightRandomArray.length === 3 &&
-      centerRandomArray.length === 3
-    ) {
-      break;
+    if (randomArray.includes(randomElement)) {
+      continue;
     }
-    if (
-      !leftRandomArray.includes(randomElement) &&
-      leftRandomArray.length < 3
-    ) {
-      leftRandomArray.push(randomElement);
-    }
-
-    if (
-      !leftRandomArray.includes(randomElement) &&
-      !rightRandomArray.includes(randomElement) &&
-      rightRandomArray.length < 3
-    )
-      rightRandomArray.push(randomElement);
-    if (
-      !centerRandomArray.includes(randomElement) &&
-      !leftRandomArray.includes(randomElement) &&
-      !rightRandomArray.includes(randomElement) &&
-      centerRandomArray.length < 3
-    ) {
-      centerRandomArray.push(randomElement);
-    }
+    randomArray.push(randomElement);
   }
-  result.push(leftRandomArray);
-  result.push(rightRandomArray);
-  result.push(centerRandomArray);
-  return result;
+  return randomArray;
 };
-const initSliderCards = () => {
-  let random = getRandomsArrays(data);
-  const dataArray2 = random[1];
 
-  for (i = 0; i < sliderCardCenter.length; i++) {
-    sliderCardCenter[i].classList.add(`${dataArray2[i].name}`);
-    sliderCardCenter[i].innerHTML = `
+const paginationData = () => {
+  const paginationData = [];
+  for (let i = 0; i < 6; i++) {
+    paginationData.push(getRandomArray(data));
+  }
+  return paginationData;
+};
+
+let PAGE_NUMBER = 1;
+const DATA_CARD = paginationData(data);
+
+const initPaginationCards = () => {
+  let PAGE_NUMBERnumber = PAGE_NUMBER - 1;
+  sliderCard.forEach((card, i) => {
+    card.classList.remove(`${card.classList[2]}`);
+    card.classList.add(`${DATA_CARD[PAGE_NUMBERnumber][i].name}`);
+    card.innerHTML = `
           <img
-             src="${dataArray2[i].img}"
+             src="${DATA_CARD[PAGE_NUMBERnumber][i].img}"
              alt="Cat"
              class="slider__image"
              />
-           <h3 class="slider__title">${dataArray2[i].name}</h3>
+           <h3 class="slider__title">${DATA_CARD[PAGE_NUMBERnumber][i].name}</h3>
            <div class="slider__button">
               <button class="frame__button button">Learn more</button>
             </div>
          `;
-  }
+  });
 };
-const initBlocks = () => {
-  let random = getRandomsArrays(data);
-  const dataArray = random;
-  const dataArray0 = random[0];
-  for (i = 0; i < sliderCardRight.length; i++) {
-    sliderCardRight[i].classList.add(`${dataArray0[i].name}`);
-    sliderCardRight[i].innerHTML = `
-          <img
-             src="${dataArray0[i].img}"
-             alt="Cat"
-             class="slider__image"
-             />
-           <h3 class="slider__title">${dataArray0[i].name}</h3>
-           <div class="slider__button">
-              <button class="frame__button button">Learn more</button>
-            </div>
-         `;
-  }
-  const dataArray1 = random[1];
 
-  for (i = 0; i < sliderCardLeft.length; i++) {
-    sliderCardLeft[i].classList.add(`${dataArray1[i].name}`);
-    sliderCardLeft[i].innerHTML = `
-          <img
-             src="${dataArray1[i].img}"
-             alt="Cat"
-             class="slider__image"
-             />
-           <h3 class="slider__title">${dataArray1[i].name}</h3>
-           <div class="slider__button">
-              <button class="frame__button button">Learn more</button>
-            </div>
-         `;
+const removeClickStyle = () => {
+  if (PAGE_NUMBER === DATA_CARD.length) {
+    paginationOnceRight.classList.remove("enable");
+    paginationOnceRight.classList.add("disable");
+    paginationDoubleRight.classList.remove("enable");
+    paginationDoubleRight.classList.add("disable");
+  }
+  if (PAGE_NUMBER === 1) {
+    paginationOnceLeft.classList.remove("enable");
+    paginationOnceLeft.classList.add("disable");
+    paginationDoubleLeft.classList.remove("enable");
+    paginationDoubleLeft.classList.add("disable");
   }
 };
 
-const moveLeft = () => {
-  slider.classList.add("slider__move-left");
-  leftArrow.removeEventListener("click", moveLeft);
-  rightArrow.removeEventListener("click", moveRight);
-};
-const moveRight = () => {
-  slider.classList.add("slider__move-right");
-  leftArrow.removeEventListener("click", moveLeft);
-  rightArrow.removeEventListener("click", moveRight);
-};
-
-const moveLeftRender = () => {
-  for (let i = 0; i < sliderCardCenter.length; i++) {
-    sliderCardCenter[i].classList.remove(`${sliderCardCenter[i].classList[2]}`);
-    sliderCardCenter[i].classList.add(`${sliderCardLeft[i].classList[2]}`);
-    sliderCardLeft[i].classList.remove(`${sliderCardLeft[i].classList[2]}`);
-    sliderCardRight[i].classList.remove(`${sliderCardRight[i].classList[2]}`);
-    sliderCardCenter[i].innerHTML = sliderCardLeft[i].innerHTML;
+const addClickStyle = () => {
+  if (PAGE_NUMBER > 1) {
+    paginationOnceLeft.classList.remove("disable");
+    paginationOnceLeft.classList.add("enable");
+    paginationDoubleLeft.classList.remove("disable");
+    paginationDoubleLeft.classList.add("enable");
   }
-  // initLeftSliderBlock();
-  initBlocks();
+  if (PAGE_NUMBER < DATA_CARD.length) {
+    paginationOnceRight.classList.remove("disable");
+    paginationOnceRight.classList.add("enable");
+    paginationDoubleRight.classList.remove("disable");
+    paginationDoubleRight.classList.add("enable");
+  }
 };
 
-const moveRightRender = () => {
-  for (let i = 0; i < sliderCardCenter.length; i++) {
-    sliderCardCenter[i].classList.remove(`${sliderCardCenter[i].classList[2]}`);
-    sliderCardCenter[i].classList.add(`${sliderCardRight[i].classList[2]}`);
-    sliderCardRight[i].classList.remove(`${sliderCardRight[i].classList[2]}`);
-    sliderCardLeft[i].classList.remove(`${sliderCardLeft[i].classList[2]}`);
-    sliderCardCenter[i].innerHTML = sliderCardRight[i].innerHTML;
-  }
-  // initRightSliderBlock();
-  initBlocks();
-};
+paginationOnceRight.addEventListener("click", () => {
+  PAGE_NUMBER++;
 
-leftArrow.addEventListener("click", moveLeft);
+  initPaginationCards();
+  paginationPAGE_NUMBER.innerText = PAGE_NUMBER;
+  removeClickStyle();
+  addClickStyle();
+});
+paginationOnceLeft.addEventListener("click", () => {
+  PAGE_NUMBER--;
 
-rightArrow.addEventListener("click", moveRight);
+  initPaginationCards();
+  paginationPAGE_NUMBER.innerText = PAGE_NUMBER;
+  removeClickStyle();
+  addClickStyle();
+});
 
-slider.addEventListener("animationend", (AnimationEvent) => {
-  if (AnimationEvent.animationName === "move-left") {
-    moveLeftRender();
-  }
-  if (AnimationEvent.animationName === "move-left768") {
-    moveLeftRender();
-  }
-
-  if (AnimationEvent.animationName === "move-left320") {
-    moveLeftRender();
-  }
-
-  if (AnimationEvent.animationName === "move-right") {
-    moveRightRender();
-  }
-  if (AnimationEvent.animationName === "move-right768") {
-    moveRightRender();
-  }
-
-  if (AnimationEvent.animationName === "move-right320") {
-    moveRightRender();
-  }
-
-  slider.classList.remove("slider__move-left");
-  slider.classList.remove("slider__move-right");
-  leftArrow.addEventListener("click", moveLeft);
-  rightArrow.addEventListener("click", moveRight);
+paginationDoubleLeft.addEventListener("click", () => {
+  PAGE_NUMBER = 1;
+  initPaginationCards();
+  paginationPAGE_NUMBER.innerText = PAGE_NUMBER;
+  removeClickStyle();
+  addClickStyle();
+});
+paginationDoubleRight.addEventListener("click", () => {
+  PAGE_NUMBER = DATA_CARD.length;
+  initPaginationCards();
+  paginationPAGE_NUMBER.innerText = PAGE_NUMBER;
+  removeClickStyle();
+  addClickStyle();
 });

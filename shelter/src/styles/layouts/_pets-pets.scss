@@ -32,13 +32,23 @@
   border-radius: 50%;
   text-align: center;
   padding: 13px 0 15px;
-  &-center {
-    background: $color-primary;
+}
+.pets__pagination-center {
+  background: $color-primary;
+}
+
+.enable {
+  &:hover {
+    background: $color-primary-light;
+    border: 2px solid $color-primary-light;
+    transition: 0.5s ease;
+    pointer-events: all;
   }
-  &-left {
-    border: 2px solid #cdcdcd;
-    color: #cdcdcd !important;
-  }
+}
+.disable {
+  border: 2px solid #cdcdcd;
+  color: #cdcdcd !important;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 1000px) {

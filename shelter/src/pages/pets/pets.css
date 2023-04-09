@@ -256,7 +256,6 @@ h3 {
 }
 
 .frame__button:hover,
-.right:hover,
 .pop-up__close:hover,
 .slider__arrow:hover {
   background: #fddcc4;
@@ -382,6 +381,11 @@ h3 {
   border-radius: 9px;
   padding: 10px;
 }
+@media (max-width: 860px) {
+  .pop-up {
+    padding: 0px;
+  }
+}
 
 .pop-up__body {
   width: 900px;
@@ -491,7 +495,7 @@ h3 {
 }
 @media (max-width: 860px) {
   .pop-up__close {
-    right: -28%;
+    right: -23%;
   }
 }
 
@@ -641,12 +645,22 @@ h3 {
   text-align: center;
   padding: 13px 0 15px;
 }
+
 .pets__pagination-center {
   background: #f1cdb3;
 }
-.pets__pagination-left {
+
+.enable:hover {
+  background: #fddcc4;
+  border: 2px solid #fddcc4;
+  transition: 0.5s ease;
+  pointer-events: all;
+}
+
+.disable {
   border: 2px solid #cdcdcd;
   color: #cdcdcd !important;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 1000px) {
