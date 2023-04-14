@@ -2,6 +2,7 @@
 //   width: 1710px;
 //   display: flex;
 //   align-items: center;
+
 // }
 
 // .slider__card {
@@ -99,6 +100,7 @@
   column-gap: 90px;
   align-items: center;
   left: -1080px;
+   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &__move-right {
     animation-name: move-right;
