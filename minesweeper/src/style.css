@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.container {
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+}
+
+.field {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px auto;
+    border: 1px solid black;
+    transition: all 1s;
+}
+
+.cell {
+    display: flex;
+    background: lightgray;
+    border: 1px solid black;
+    line-height: 15px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background: grey;
+}
+
+@media screen and (max-width: 500px) {
+    .field {
+        width: 90%;
+        font-size: 12px;
+    }
+}
