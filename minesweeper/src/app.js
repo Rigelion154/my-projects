@@ -1,12 +1,12 @@
-import {createField, field, getMines, renderField} from "./components/field";
-import {mines} from "./components/mines";
+import {startGame} from "./components/field";
+
+
 
 
 function start() {
-  createField();
-  getMines();
-  renderField(field)
-  console.log(field);
+  startGame()
+
+  // setInterval()
 }
 
 start()

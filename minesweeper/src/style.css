@@ -3,6 +3,11 @@
     user-select: none;
 }
 
+body {
+    font-family: "Roboto", sans-serif;
+    font-weight: bolder;
+}
+
 .container {
     max-width: 1200px;
     height: 100%;
@@ -14,22 +19,73 @@
     display: flex;
     flex-wrap: wrap;
     margin: 30px auto;
-    border: 1px solid black;
+    border: 1px outset black;
     transition: all 1s;
 }
 
 .cell {
     display: flex;
     background: lightgray;
-    border: 1px solid black;
+    border: 3px outset darkgray;
     line-height: 15px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
 
+.open {
+    background: white;
+    border: 1px solid darkgrey;
+}
+
+.bomb {
+    background: url("./assets/bomb.png");
+    background-size: cover;
+}
+
+.red {
+    background: red;
+}
+
+.cell-1 {
+    color: blue;
+}
+
+.cell-2 {
+    color: green;
+}
+
+.cell-3 {
+    color: red;
+}
+
+.cell-4 {
+    color: darkblue;
+}
+
+.cell-5 {
+    color: brown;
+}
+
+.cell-6 {
+    color: turquoise;
+}
+
+.cell-7 {
+    color: black;
+}
+
+.cell-8 {
+    color: gray;
+}
+
 .cell:hover {
     background: grey;
+}
+
+.bomb:hover {
+    background: url("./assets/bomb.png");
+    background-size: cover;
 }
 
 @media screen and (max-width: 500px) {
