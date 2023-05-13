@@ -1,12 +1,12 @@
 import {startGame} from "./components/field";
+import {getHtmlElements} from "./utils/createHtml";
 
 
 
 
-function start() {
+function app() {
+  getHtmlElements ()
   startGame()
-
-  // setInterval()
 }
 
-start()
+app()

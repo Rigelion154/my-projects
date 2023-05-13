@@ -1,5 +1,5 @@
-import { getHtmlElements} from "../utils/createHtml";
-import {timers, interval} from "../utils/timer";
+import {timers, interval, resetButtonHandler, sizeButtonsHandler} from "../utils/timer";
+// import {resetButtonHandler} from "./resetButton";
 
 export class Field {
   constructor(width, height, bombsCount) {
@@ -10,21 +10,21 @@ export class Field {
     this.timerStart = true
     this.fieldDiv = document.querySelector('.field')
     this.bombs = [...Array(this.cellsCount).keys()].sort(() => Math.random() - 0.5).slice(0, this.bombs)
-    console.log(this.bombs)
   }
 
 
   getField() {
     this.fieldDiv.innerHTML = ''
-    while (this.cellsCount) {
+    let count = this.cellsCount
+    while (count) {
       this.cell = document.createElement('div')
       this.cell.className = 'cell'
       this.fieldDiv.append(this.cell)
-      this.cellsCount--
+      count--
     }
     this.cellSize()
     this.cells = [...this.fieldDiv.children]
-    this.fieldDiv.addEventListener('click', ()=> {
+    this.fieldDiv.addEventListener('click', () => {
       if (this.timerStart) {
         timers()
         this.timerStart = false
@@ -37,7 +37,6 @@ export class Field {
       this.bombClickHandler(row, column)
     })
   }
-
   isValid(row, column) {
     return row >= 0 && row < this.height && column >= 0 && column < this.width
   }
@@ -52,13 +51,15 @@ export class Field {
     if (!this.isValid(row, column)) return;
     const index = row * this.width + column
     const cell = this.cells[index]
+
     if (cell.classList.contains('open')) return;
     cell.classList.add('open')
+
     if (this.isBomb(row, column)) {
-      // cell.style.background = 'red'
+      document.querySelector('.popup').style.display = 'block'
+      document.querySelector('.reset').src = './assets/sad.png'
       clearInterval(interval)
       this.bombs.forEach(bomb => {
-        // this.cells[bomb].textContent = `💣`
         this.cells[bomb].classList.add('bomb')
         this.cells[bomb].classList.add('open')
       })
@@ -88,6 +89,7 @@ export class Field {
     }
     return count
   }
+
   cellSize() {
     const cell = document.querySelectorAll('.cell')
     cell.forEach(el => {
@@ -98,21 +100,42 @@ export class Field {
 
 }
 
-function fieldSizeHandler (field) {
-  window.addEventListener('load', ()=>{
+function fieldSizeHandler(field) {
+  window.addEventListener('load', () => {
     field.cellSize()
   })
-  window.addEventListener('resize', ()=>{
+  window.addEventListener('resize', () => {
     field.cellSize()
   })
 }
 
-export function startGame() {
-  getHtmlElements()
-  const field = new Field(10, 10, 10);
+function gameSettings (field) {
+  document.querySelector('.popup').style.display = 'none'
+  document.querySelector('.reset').src = './assets/smile.png'
+  clearInterval(interval)
   field.getField()
-  fieldSizeHandler (field)
+  fieldSizeHandler(field)
+  resetButtonHandler()
+  sizeButtonsHandler ()
+}
+
+export function startGame() {
+  const medium = document.querySelector('.medium')
+  const small = document.querySelector('.small')
+  const large = document.querySelector('.large')
+  if (small.classList.contains('active')) {
+    const field = new Field(10, 10, 10);
+    gameSettings (field)
+  } else if (medium.classList.contains('active')) {
+    const field = new Field(15, 15, 40);
+    gameSettings (field)
+  } else  if (large.classList.contains('active')) {
+    const field = new Field(25, 25, 99);
+    gameSettings (field)
   }
+
+}
+
 
 
 

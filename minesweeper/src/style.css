@@ -14,12 +14,62 @@ body {
     margin: auto;
 }
 
+.header {
+    width: 60%;
+    margin: auto;
+    font-size: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 10px double gray;
+    background: lightgray;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    row-gap: 10px;
+    padding: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.button,
+.score {
+    background: lightgray;
+    border: 3px outset darkgray;
+    padding: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.timer,
+.progress {
+    color: red;
+    line-height: 33px;
+    border: 3px inset darkgray;
+    padding: 5px;
+}
+
+
 .field {
     width: 60%;
     display: flex;
     flex-wrap: wrap;
-    margin: 30px auto;
-    border: 1px outset black;
+    margin: auto;
+    background: lightgray;
+    border: 10px double gray;
+    border-top-style: none;
     transition: all 1s;
 }
 
@@ -41,6 +91,34 @@ body {
 .bomb {
     background: url("./assets/bomb.png");
     background-size: cover;
+}
+
+.reset {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    background: lightgray;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-size: cover;
+    padding: 5px;
+    border: 3px outset darkgray;
+    z-index: 2;
+}
+
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: none;
+}
+
+.clicked {
+    border: 4px solid gray;
 }
 
 .red {
@@ -92,5 +170,10 @@ body {
     .field {
         width: 90%;
         font-size: 12px;
+    }
+
+    .header {
+        width: 90%;
+        font-size: 25px;
     }
 }
