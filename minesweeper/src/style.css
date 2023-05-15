@@ -1,17 +1,30 @@
 * {
     box-sizing: border-box;
     user-select: none;
+    margin: 0;
 }
 
 body {
     font-family: "Roboto", sans-serif;
     font-weight: bolder;
+    background: gainsboro;
+}
+
+.aside {
+    background: lightgray;
+    max-width: 200px;
+    float: left;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    border: 10px double gray;
 }
 
 .container {
     max-width: 1200px;
     height: 100%;
-    margin: auto;
+    margin: 50px auto;
 }
 
 .header {
@@ -33,8 +46,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 10px;
+    flex-direction: column;
+    row-gap: 10px;
 }
+
 
 .button,
 .score {
@@ -43,7 +58,11 @@ body {
     padding: 5px;
     font-size: 15px;
     cursor: pointer;
-    z-index: 2;
+    /*z-index: 2;*/
+}
+
+.button-active {
+    background: darkgray;
 }
 
 .center {
@@ -57,8 +76,24 @@ body {
 .progress {
     color: red;
     line-height: 33px;
-    border: 3px inset darkgray;
+    border: 3px solid darkgray;
     padding: 5px;
+    border-radius: 10px;
+}
+
+.reset {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    background: lightgray;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-size: cover;
+    padding: 5px;
+    border: 3px outset darkgray;
+    z-index: 2;
+    border-radius: 10px;
 }
 
 
@@ -93,20 +128,6 @@ body {
     background-size: cover;
 }
 
-.reset {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    background: lightgray;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background-size: cover;
-    padding: 5px;
-    border: 3px outset darkgray;
-    z-index: 2;
-}
-
 .popup {
     position: absolute;
     top: 0;
@@ -115,14 +136,15 @@ body {
     height: 100%;
     z-index: 1;
     display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: red;
+    background: rgba(0, 0, 0, 0.8)
 }
 
 .clicked {
     border: 4px solid gray;
-}
-
-.red {
-    background: red;
 }
 
 .cell-1 {

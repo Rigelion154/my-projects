@@ -1,5 +1,6 @@
-import {timers, interval, resetButtonHandler, sizeButtonsHandler} from "../utils/timer";
-// import {resetButtonHandler} from "./resetButton";
+import {timers, interval, resetButtonHandler} from "../utils/timer";
+import {sizeButtonsHandler} from "../utils/buttonsHandler";
+
 
 export class Field {
   constructor(width, height, bombsCount) {
@@ -10,8 +11,10 @@ export class Field {
     this.timerStart = true
     this.fieldDiv = document.querySelector('.field')
     this.bombs = [...Array(this.cellsCount).keys()].sort(() => Math.random() - 0.5).slice(0, this.bombs)
+    this.progress = document.querySelector('.progress')
+    this.progressCounter = 0
+    this.openedCells = this.cellsCount
   }
-
 
   getField() {
     this.fieldDiv.innerHTML = ''
@@ -24,6 +27,7 @@ export class Field {
     }
     this.cellSize()
     this.cells = [...this.fieldDiv.children]
+    this.progress.innerHTML= '000'
     this.fieldDiv.addEventListener('click', () => {
       if (this.timerStart) {
         timers()
@@ -31,12 +35,14 @@ export class Field {
       }
     })
     this.fieldDiv.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('open')) this.getProgressCount()
       const index = this.cells.indexOf(e.target)
       const row = Math.floor(index / this.width)
       const column = index % this.width
       this.bombClickHandler(row, column)
     })
   }
+
   isValid(row, column) {
     return row >= 0 && row < this.height && column >= 0 && column < this.width
   }
@@ -47,16 +53,23 @@ export class Field {
     return this.bombs.includes(index)
   }
 
+  getProgressCount() {
+    this.progressCounter++
+    if (this.progressCounter > 99) {
+      this.progress.innerHTML = `${this.progressCounter}`
+    } else if (this.progressCounter > 9) {
+      this.progress.innerHTML = `0${this.progressCounter}`
+    } else this.progress.innerHTML = `00${this.progressCounter}`
+  }
+
   bombClickHandler(row, column) {
     if (!this.isValid(row, column)) return;
     const index = row * this.width + column
     const cell = this.cells[index]
-
     if (cell.classList.contains('open')) return;
     cell.classList.add('open')
-
     if (this.isBomb(row, column)) {
-      document.querySelector('.popup').style.display = 'block'
+      document.querySelector('.popup-loose').style.display = 'flex'
       document.querySelector('.reset').src = './assets/sad.png'
       clearInterval(interval)
       this.bombs.forEach(bomb => {
@@ -65,12 +78,22 @@ export class Field {
       })
       return;
     }
+
+
+    this.openedCells--
+    // console.log(this.openedCells)
+    // console.log(this.bombs.length)
+    if (this.openedCells <= this.bombs.length) {
+      document.querySelector('.popup-win').style.display = 'flex'
+    }
+
     const count = this.getBombCount(row, column)
     if (count !== 0) {
       cell.textContent = count
       cell.classList.add(`cell-${count}`)
       return;
     }
+
     for (let x = -1; x <= 1; x++) {
       for (let y = -1; y <= 1; y++) {
         this.bombClickHandler(row + y, column + x)
@@ -97,7 +120,6 @@ export class Field {
       el.style.height = `${el.offsetWidth}px`
     })
   }
-
 }
 
 function fieldSizeHandler(field) {
@@ -109,14 +131,15 @@ function fieldSizeHandler(field) {
   })
 }
 
-function gameSettings (field) {
-  document.querySelector('.popup').style.display = 'none'
+function gameSettings(field) {
+  document.querySelector('.popup-loose').style.display = 'none'
+  document.querySelector('.popup-win').style.display = 'none'
   document.querySelector('.reset').src = './assets/smile.png'
   clearInterval(interval)
   field.getField()
   fieldSizeHandler(field)
   resetButtonHandler()
-  sizeButtonsHandler ()
+  sizeButtonsHandler()
 }
 
 export function startGame() {
@@ -125,15 +148,14 @@ export function startGame() {
   const large = document.querySelector('.large')
   if (small.classList.contains('active')) {
     const field = new Field(10, 10, 10);
-    gameSettings (field)
+    gameSettings(field)
   } else if (medium.classList.contains('active')) {
     const field = new Field(15, 15, 40);
-    gameSettings (field)
-  } else  if (large.classList.contains('active')) {
+    gameSettings(field)
+  } else if (large.classList.contains('active')) {
     const field = new Field(25, 25, 99);
-    gameSettings (field)
+    gameSettings(field)
   }
-
 }
 
 

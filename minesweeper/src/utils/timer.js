@@ -1,4 +1,4 @@
-import {Field, startGame} from "../components/field";
+import {startGame} from "../components/field";
 
 
 export let interval;
@@ -13,8 +13,8 @@ function startTimer() {
   } else if (sec > 9) {
     timer.innerHTML = `0${sec}`
   } else timer.innerHTML = `00${sec}`
-}
 
+}
 
 export function timers() {
   clearInterval(interval)
@@ -35,30 +35,7 @@ export function resetButtonHandler() {
   })
 }
 
-export function sizeButtonsHandler() {
-  const medium = document.querySelector('.medium')
-  const small = document.querySelector('.small')
-  const large = document.querySelector('.large')
 
-  medium.addEventListener('click', () => {
-    medium.classList.add('active')
-    small.classList.remove('active')
-    large.classList.remove('active')
-    startGame()
-  })
-  small.addEventListener('click', () => {
-    small.classList.add('active')
-    large.classList.remove('active')
-    medium.classList.remove('active')
-    startGame()
-  })
-  large.addEventListener('click', () => {
-    large.classList.add('active')
-    small.classList.remove('active')
-    medium.classList.remove('active')
-    startGame()
-  })
-}
 
 
 
