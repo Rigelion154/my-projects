@@ -1,5 +1,6 @@
 import {timers, interval, resetButtonHandler} from "../utils/timer";
 import {sizeButtonsHandler} from "../utils/buttonsHandler";
+import {getTheme} from "../utils/theme";
 
 
 export class Field {
@@ -22,12 +23,15 @@ export class Field {
     while (count) {
       this.cell = document.createElement('div')
       this.cell.className = 'cell'
+      if (document.querySelector('.dark').classList.contains('is-dark')) {
+        this.cell.classList.add('dark-theme')
+      }
       this.fieldDiv.append(this.cell)
       count--
     }
     this.cellSize()
     this.cells = [...this.fieldDiv.children]
-    this.progress.innerHTML= '000'
+    this.progress.innerHTML = '000'
     this.fieldDiv.addEventListener('click', () => {
       if (this.timerStart) {
         timers()
@@ -66,8 +70,10 @@ export class Field {
     if (!this.isValid(row, column)) return;
     const index = row * this.width + column
     const cell = this.cells[index]
+
     if (cell.classList.contains('open')) return;
     cell.classList.add('open')
+
     if (this.isBomb(row, column)) {
       document.querySelector('.popup-loose').style.display = 'flex'
       document.querySelector('.reset').src = './assets/sad.png'
@@ -79,12 +85,10 @@ export class Field {
       return;
     }
 
-
     this.openedCells--
-    // console.log(this.openedCells)
-    // console.log(this.bombs.length)
     if (this.openedCells <= this.bombs.length) {
       document.querySelector('.popup-win').style.display = 'flex'
+      clearInterval(interval)
     }
 
     const count = this.getBombCount(row, column)
@@ -140,6 +144,7 @@ function gameSettings(field) {
   fieldSizeHandler(field)
   resetButtonHandler()
   sizeButtonsHandler()
+  getTheme()
 }
 
 export function startGame() {
@@ -156,6 +161,7 @@ export function startGame() {
     const field = new Field(25, 25, 99);
     gameSettings(field)
   }
+
 }
 
 

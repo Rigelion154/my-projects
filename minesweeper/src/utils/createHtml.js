@@ -7,7 +7,12 @@ export function getHtmlElements() {
           <button class="medium button">15x15</button>
           <button class="large button">25x25</button>
         </div>
-        <div class="score">Score</div>
+        <div class="theme">
+        <h2 class="theme__title">Theme</h2>
+<!--        <button class="light button">Light</button>-->
+        <button class="dark button">Dark</button>
+        </div>
+        <div class="score button">Score</div>
       </aside>
       <div class="container">
         <div class="header">
