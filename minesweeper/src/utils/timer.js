@@ -1,4 +1,5 @@
 import {startGame} from "../components/field";
+import audio from '../assets/sounds/restart.mp3'
 
 
 export let interval;
@@ -22,12 +23,15 @@ export function timers() {
 }
 
 export function resetButtonHandler() {
+  const restartAudio = new Audio(audio)
   const timer = document.querySelector('.timer')
   timer.textContent = '000'
   sec = 0
   const button = document.querySelector('.reset')
   button.addEventListener('click', startGame)
   button.addEventListener('mousedown', () => {
+
+    restartAudio.play()
     button.classList.add('clicked')
   })
   button.addEventListener('mouseup', () => {

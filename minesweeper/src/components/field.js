@@ -3,6 +3,8 @@ import {sizeButtonsHandler} from "../utils/buttonsHandler";
 import {getTheme} from "../utils/theme";
 import sad from '../assets/sad.png'
 import smile from '../assets/smile.png'
+import boom from '../assets/sounds/boom.mp3'
+import click from '../assets/sounds/click.mp3'
 
 export class Field {
   constructor(width, height, bombsCount) {
@@ -16,6 +18,8 @@ export class Field {
     this.progress = document.querySelector('.progress')
     this.progressCounter = 0
     this.openedCells = this.cellsCount
+    this.boomSound = new Audio(boom)
+    this.clickSound = new Audio(click)
   }
 
   getField() {
@@ -40,7 +44,9 @@ export class Field {
       }
     })
     this.fieldDiv.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('open')) this.getProgressCount()
+      if (!e.target.classList.contains('open') && !e.target.classList.contains('field')) {
+        this.getProgressCount()
+      }
       const index = this.cells.indexOf(e.target)
       const row = Math.floor(index / this.width)
       const column = index % this.width
@@ -76,8 +82,11 @@ export class Field {
     cell.classList.add('open')
 
     if (this.isBomb(row, column)) {
-      document.querySelector('.popup-loose').style.display = 'flex'
+      // document.querySelector('.popup-loose').style.display = 'flex'
+      document.querySelector('.popup-loose').style.zIndex = '1'
+      document.querySelector('.popup-loose').style.opacity = '1'
       document.querySelector('.reset').src = `${sad}`
+      this.boomSound.play()
       clearInterval(interval)
       this.bombs.forEach(bomb => {
         this.cells[bomb].classList.add('bomb')
@@ -92,12 +101,15 @@ export class Field {
         this.cells[bomb].classList.add('bomb')
         this.cells[bomb].classList.add('open')
       })
-      document.querySelector('.popup-win').style.display = 'flex'
+      // document.querySelector('.popup-win').style.display = 'flex'
+      document.querySelector('.popup-win').style.zIndex = '1'
+      document.querySelector('.popup-win').style.opacity = '1'
       clearInterval(interval)
     }
 
     const count = this.getBombCount(row, column)
     if (count !== 0) {
+      this.clickSound.play()
       cell.textContent = count
       cell.classList.add(`cell-${count}`)
       return;
@@ -141,8 +153,12 @@ function fieldSizeHandler(field) {
 }
 
 function gameSettings(field) {
-  document.querySelector('.popup-loose').style.display = 'none'
-  document.querySelector('.popup-win').style.display = 'none'
+  // document.querySelector('.popup-loose').style.display = 'none'
+  document.querySelector('.popup-loose').style.zIndex = '-1'
+  document.querySelector('.popup-loose').style.opacity = '0'
+  // document.querySelector('.popup-win').style.display = 'none'
+  document.querySelector('.popup-win').style.zIndex = '-1'
+  document.querySelector('.popup-win').style.opacity = '0'
   document.querySelector('.reset').src = `${smile}`
   clearInterval(interval)
   field.getField()
@@ -166,7 +182,8 @@ export function startGame() {
     const field = new Field(25, 25, 99);
     gameSettings(field)
   }
-
+  // const field = new Field(10, 10, 2);
+  // gameSettings(field)
 }
 
 

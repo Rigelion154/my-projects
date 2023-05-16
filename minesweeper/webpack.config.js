@@ -22,11 +22,26 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      // {
+      //   test: /\.(png|jpe?g|gif)$/,
+      //   // test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
+      //   use: ['file-loader'],
+      //   dependency: {not: ['url']},
+      // },
+      // {
+      //   test: /\.(mp3|wav)$/i,
+      //   type: "asset",
+      //   generator: {
+      //     filename: 'audio/[name][ext]'
+      //   }
+      // },
       {
-        test: /\.(png|jpe?g|gif)$/,
-        use: ['file-loader'],
-        dependency: { not: ['url'] },
-      }
+        test: /\.(mp3?|wav|png|ogg|mpe?g)$/i,
+        type: 'asset',
+        generator: {
+          filename: 'assets/[name][hash][ext]',
+        },
+      },
     ]
   }
 };
