@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/app.js',
@@ -14,4 +15,18 @@ module.exports = {
     compress: true,
     port: 3000,
   },
+  plugins: [new HtmlWebpackPlugin({template: './src/index.html'})],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        use: ['file-loader'],
+        dependency: { not: ['url'] },
+      }
+    ]
+  }
 };

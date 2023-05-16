@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
     user-select: none;
@@ -60,10 +61,6 @@ body {
     font-size: 15px;
     cursor: pointer;
     /*z-index: 2;*/
-}
-
-.button-active {
-    background: darkgray;
 }
 
 .center {
@@ -150,6 +147,15 @@ body {
 
 }
 
+.button-active {
+    background: darkgray;
+}
+
+.bomb:hover {
+    background: url("./assets/bomb.png");
+    background-size: cover;
+}
+
 .bomb {
     background: url("./assets/bomb.png") !important;
     background-size: cover !important;
@@ -194,11 +200,6 @@ body {
 .cell:hover,
 .button:hover {
     background: grey;
-}
-
-.bomb:hover {
-    background: url("./assets/bomb.png");
-    background-size: cover;
 }
 
 

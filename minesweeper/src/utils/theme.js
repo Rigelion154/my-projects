@@ -10,6 +10,7 @@ function setTheme() {
   document.querySelector('.header').classList.toggle('dark-theme')
   document.querySelector('.reset').classList.toggle('dark-theme')
   document.querySelector('.dark').classList.toggle('is-dark')
+  document.querySelector('.dark').classList.toggle('button-active')
   document.querySelectorAll('.cell').forEach(el => {
     el.classList.toggle('dark-theme')
   })

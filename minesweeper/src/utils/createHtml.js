@@ -1,3 +1,7 @@
+// import smile from '../assets/smile.png'
+
+
+// console.log(smile)
 export function getHtmlElements() {
   document.body.innerHTML = `
       <aside class="aside">
@@ -18,7 +22,7 @@ export function getHtmlElements() {
         <div class="header">
           <div class="center">
             <div class="timer">000 </div>
-            <img src="./assets/smile.png" alt="smile" class="reset">
+            <img src= '' alt="smile" class="reset">
             <div class="progress"></div>
           </div>
         </div>
@@ -26,7 +30,9 @@ export function getHtmlElements() {
         <div class="popup-loose popup">You Loose</div>
         <div class="popup-win popup">You Win</div>
       </div>
-`}
+`
+  // document.querySelector('.reset').src = `${smile}`
+}
 
 getHtmlElements()
 

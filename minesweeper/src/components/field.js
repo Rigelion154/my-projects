@@ -1,7 +1,8 @@
 import {timers, interval, resetButtonHandler} from "../utils/timer";
 import {sizeButtonsHandler} from "../utils/buttonsHandler";
 import {getTheme} from "../utils/theme";
-
+import sad from '../assets/sad.png'
+import smile from '../assets/smile.png'
 
 export class Field {
   constructor(width, height, bombsCount) {
@@ -76,7 +77,7 @@ export class Field {
 
     if (this.isBomb(row, column)) {
       document.querySelector('.popup-loose').style.display = 'flex'
-      document.querySelector('.reset').src = './assets/sad.png'
+      document.querySelector('.reset').src = `${sad}`
       clearInterval(interval)
       this.bombs.forEach(bomb => {
         this.cells[bomb].classList.add('bomb')
@@ -87,6 +88,10 @@ export class Field {
 
     this.openedCells--
     if (this.openedCells <= this.bombs.length) {
+      this.bombs.forEach(bomb => {
+        this.cells[bomb].classList.add('bomb')
+        this.cells[bomb].classList.add('open')
+      })
       document.querySelector('.popup-win').style.display = 'flex'
       clearInterval(interval)
     }
@@ -138,7 +143,7 @@ function fieldSizeHandler(field) {
 function gameSettings(field) {
   document.querySelector('.popup-loose').style.display = 'none'
   document.querySelector('.popup-win').style.display = 'none'
-  document.querySelector('.reset').src = './assets/smile.png'
+  document.querySelector('.reset').src = `${smile}`
   clearInterval(interval)
   field.getField()
   fieldSizeHandler(field)
