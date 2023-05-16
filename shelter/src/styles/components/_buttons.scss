@@ -1,0 +1,43 @@
+.button {
+  border-radius: 100px;
+  padding: 13px 43px;
+  font-size: 1.7rem;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: $color-buttons;
+}
+
+.fill__button {
+  background: $color-primary;
+  padding: 15px 45px;
+}
+
+.frame__button {
+  border: 2px solid $color-primary;
+}
+
+.fill__button:hover,
+.number:hover {
+  background: $color-primary-light;
+  transition: 0.5s ease;
+}
+
+.frame__button:hover,
+.pop-up__close:hover,
+.slider__arrow:hover {
+  background: $color-primary-light;
+  border: 2px solid $color-primary-light;
+  transition: 0.5s ease;
+}
+
+.donation__button {
+  border-radius: 9px;
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: 0.06em;
+  color: #545454;
+  padding: 10px 14px;
+}

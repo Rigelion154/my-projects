@@ -1,0 +1,50 @@
+.burger {
+  background: none;
+  width: 30px;
+  height: 22px;
+  align-items: center;
+  cursor: pointer;
+  display: none;
+  z-index: 1;
+}
+
+.burger-menu {
+  position: relative;
+  width: 30px;
+  height: 2px;
+  background: $color-secondary;
+  &::before {
+    content: "";
+    bottom: 10px;
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: $color-secondary;
+  }
+
+  &::after {
+    content: "";
+    top: 10px;
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: $color-secondary;
+  }
+}
+
+.burger__open {
+  transform: rotate(90deg);
+  transition: 0.5s ease;
+}
+.burger__closed {
+  transform: rotate(0deg);
+  transition: 0.5s ease;
+}
+
+@media (max-width: 760px) {
+  .burger {
+    display: flex;
+  }
+}

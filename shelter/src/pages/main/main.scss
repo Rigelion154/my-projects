@@ -1,0 +1,17 @@
+/*abstract*/
+@import "../../styles/abstract/variables";
+/*base*/
+@import "../../styles/base/";
+/*components*/
+@import "../../styles/components/buttons";
+@import "../../styles/components/slider";
+@import "../../styles/components/burger";
+@import "../../styles/components/pop-up";
+/*layouts*/
+@import "../../styles/layouts/header.scss";
+@import "../../styles/layouts/start";
+@import "../../styles/layouts/about";
+@import "../../styles/layouts/pets";
+@import "../../styles/layouts/help";
+@import "../../styles/layouts/donations";
+@import "../../styles/layouts/footer";
