@@ -1,9 +1,12 @@
-import {startGame} from "../components/field";
+import {startGame} from "./startGame";
+
 
 export function sizeButtonsHandler() {
   const medium = document.querySelector('.medium')
   const small = document.querySelector('.small')
   const large = document.querySelector('.large')
+  const mines = document.querySelector('.set-mines__button')
+  const minesInput = document.querySelector('.set-mines__input')
 
   medium.addEventListener('click', () => {
     medium.classList.add('active')
@@ -32,4 +35,10 @@ export function sizeButtonsHandler() {
     medium.classList.remove('button-active')
     startGame()
   })
+
+  mines.addEventListener('click', () => {
+    if (minesInput.value < 10 || minesInput.value > 99) minesInput.value = ''
+    else startGame()
+  })
+
 }

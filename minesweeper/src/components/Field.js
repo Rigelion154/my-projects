@@ -1,8 +1,5 @@
-import {timers, interval, resetButtonHandler} from "../utils/timer";
-import {sizeButtonsHandler} from "../utils/buttonsHandler";
-import {getTheme} from "../utils/theme";
+import {timers, interval} from "../utils/timer";
 import sad from '../assets/sad.png'
-import smile from '../assets/smile.png'
 import boom from '../assets/sounds/boom.mp3'
 import click from '../assets/sounds/click.mp3'
 
@@ -10,48 +7,58 @@ export class Field {
   constructor(width, height, bombsCount) {
     this.width = width
     this.height = height
-    this.bombs = bombsCount
+    this.bombsCount = bombsCount
     this.cellsCount = width * height
     this.timerStart = true
     this.fieldDiv = document.querySelector('.field')
-    this.bombs = [...Array(this.cellsCount).keys()].sort(() => Math.random() - 0.5).slice(0, this.bombs)
+    this.bombs = [...Array(this.cellsCount).keys()].sort(() => Math.random() - 0.5).slice(0, this.bombsCount)
     this.progress = document.querySelector('.progress')
     this.progressCounter = 0
     this.openedCells = this.cellsCount
     this.boomSound = new Audio(boom)
     this.clickSound = new Audio(click)
+    this.mines = document.querySelector('.mines__count')
+    this.flags = document.querySelector('.flags__count')
   }
 
   getField() {
-    this.fieldDiv.innerHTML = ''
-    let count = this.cellsCount
-    while (count) {
-      this.cell = document.createElement('div')
-      this.cell.className = 'cell'
-      if (document.querySelector('.dark').classList.contains('is-dark')) {
-        this.cell.classList.add('dark-theme')
-      }
-      this.fieldDiv.append(this.cell)
-      count--
-    }
-    this.cellSize()
+    // this.fieldDiv.innerHTML = ''
+    // this.fieldDiv.className = 'field'
+    // let count = this.cellsCount
+    // while (count) {
+    //   this.cell = document.createElement('div')
+    //   this.cell.className = 'cell'
+    //   if (document.querySelector('.dark').classList.contains('is-dark')) {
+    //     this.cell.classList.add('dark-theme')
+    //   }
+    //   this.fieldDiv.append(this.cell)
+    //   count--
+    // }
+    // document.querySelector('.field-wrapper').innerHTML = ''
+    // document.querySelector('.field-wrapper').append(this.fieldDiv)
+
+    // this.cellSize()
     this.cells = [...this.fieldDiv.children]
     this.progress.innerHTML = '000'
-    this.fieldDiv.addEventListener('click', () => {
+    this.mines.textContent = this.bombsCount
+    this.flags.textContent = '0'
+
+    this.fieldDiv.addEventListener('click', (e) => {
+      const index = this.cells.indexOf(e.target)
+      const row = Math.floor(index / this.width)
+      const column = index % this.width
+
+      if (!e.target.classList.contains('open') && !e.target.classList.contains('field') && !e.target.classList.contains('flag')) {
+        this.getProgressCount()
+      }
       if (this.timerStart) {
         timers()
         this.timerStart = false
       }
-    })
-    this.fieldDiv.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('open') && !e.target.classList.contains('field')) {
-        this.getProgressCount()
-      }
-      const index = this.cells.indexOf(e.target)
-      const row = Math.floor(index / this.width)
-      const column = index % this.width
       this.bombClickHandler(row, column)
     })
+
+
   }
 
   isValid(row, column) {
@@ -78,11 +85,11 @@ export class Field {
     const index = row * this.width + column
     const cell = this.cells[index]
 
-    if (cell.classList.contains('open')) return;
+    if (cell.classList.contains('open') || cell.classList.contains('flag')) return;
+
     cell.classList.add('open')
 
     if (this.isBomb(row, column)) {
-      // document.querySelector('.popup-loose').style.display = 'flex'
       document.querySelector('.popup-loose').style.zIndex = '1'
       document.querySelector('.popup-loose').style.opacity = '1'
       document.querySelector('.reset').src = `${sad}`
@@ -96,12 +103,12 @@ export class Field {
     }
 
     this.openedCells--
+
     if (this.openedCells <= this.bombs.length) {
       this.bombs.forEach(bomb => {
         this.cells[bomb].classList.add('bomb')
         this.cells[bomb].classList.add('open')
       })
-      // document.querySelector('.popup-win').style.display = 'flex'
       document.querySelector('.popup-win').style.zIndex = '1'
       document.querySelector('.popup-win').style.opacity = '1'
       clearInterval(interval)
@@ -134,60 +141,13 @@ export class Field {
     return count
   }
 
-  cellSize() {
-    const cell = document.querySelectorAll('.cell')
-    cell.forEach(el => {
-      el.style.width = `${100 / this.width}%`
-      el.style.height = `${el.offsetWidth}px`
-    })
-  }
+  // cellSize() {
+  //   const cell = document.querySelectorAll('.cell')
+  //   cell.forEach(el => {
+  //     el.style.width = `${100 / this.width}%`
+  //     el.style.height = `${el.offsetWidth}px`
+  //   })
+  // }
 }
-
-function fieldSizeHandler(field) {
-  window.addEventListener('load', () => {
-    field.cellSize()
-  })
-  window.addEventListener('resize', () => {
-    field.cellSize()
-  })
-}
-
-function gameSettings(field) {
-  // document.querySelector('.popup-loose').style.display = 'none'
-  document.querySelector('.popup-loose').style.zIndex = '-1'
-  document.querySelector('.popup-loose').style.opacity = '0'
-  // document.querySelector('.popup-win').style.display = 'none'
-  document.querySelector('.popup-win').style.zIndex = '-1'
-  document.querySelector('.popup-win').style.opacity = '0'
-  document.querySelector('.reset').src = `${smile}`
-  clearInterval(interval)
-  field.getField()
-  fieldSizeHandler(field)
-  resetButtonHandler()
-  sizeButtonsHandler()
-  getTheme()
-}
-
-export function startGame() {
-  const medium = document.querySelector('.medium')
-  const small = document.querySelector('.small')
-  const large = document.querySelector('.large')
-  if (small.classList.contains('active')) {
-    const field = new Field(10, 10, 10);
-    gameSettings(field)
-  } else if (medium.classList.contains('active')) {
-    const field = new Field(15, 15, 40);
-    gameSettings(field)
-  } else if (large.classList.contains('active')) {
-    const field = new Field(25, 25, 99);
-    gameSettings(field)
-  }
-  // const field = new Field(10, 10, 2);
-  // gameSettings(field)
-}
-
-
-
-
 
 

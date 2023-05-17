@@ -20,7 +20,34 @@ body {
     flex-direction: column;
     row-gap: 10px;
     border: 10px double gray;
+    border-radius: 5px;
 }
+
+.buttons__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.second-row {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.set-mines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.set-mines__input {
+    min-width: 120px;
+    text-align: center;
+}
+
 
 .container {
     max-width: 1200px;
@@ -29,19 +56,20 @@ body {
 }
 
 .header {
-    width: 60%;
+    width: 50%;
     margin: auto;
-    font-size: 30px;
+    font-size: 20px;
     display: flex;
     flex-wrap: wrap;
     border: 10px double gray;
     background: lightgray;
     justify-content: center;
     align-items: center;
+    text-align: center;
     column-gap: 30px;
     row-gap: 10px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .buttons,
@@ -61,7 +89,8 @@ body {
     padding: 5px;
     font-size: 15px;
     cursor: pointer;
-    /*z-index: 2;*/
+    border-radius: 5px;
+    text-align: center;
 }
 
 .center {
@@ -72,12 +101,11 @@ body {
 }
 
 .timer,
-.progress {
+.progress,
+.mines__count,
+.flags__count,
+.set-mines__input::placeholder {
     color: red;
-    line-height: 33px;
-    border: 3px solid darkgray;
-    padding: 5px;
-    border-radius: 10px;
 }
 
 .reset {
@@ -97,18 +125,19 @@ body {
 
 
 .field {
-    width: 60%;
+    width: 50%;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
     background: lightgray;
     border: 10px double gray;
-    transition: all 1s;
     border-radius: 5px;
 }
 
 .cell {
     display: flex;
+    width: 10%;
+    height: 10%;
     background: lightgray;
     border: 3px outset darkgray;
     line-height: 15px;
@@ -116,6 +145,17 @@ body {
     justify-content: center;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.big {
+    width: 4%;
+    height: 4%;
+    border-radius: 1px;
+}
+
+.medium-cell {
+    width: 6.6%;
+    height: 6.6%;
 }
 
 .open {
@@ -148,7 +188,6 @@ body {
 
 .dark-theme .open {
     background: gray;
-
 }
 
 .button-active {
@@ -162,6 +201,16 @@ body {
 
 .bomb {
     background: url("./assets/bomb.png") !important;
+    background-size: cover !important;
+}
+
+.flag {
+    background: url("./assets/flag.png");
+    background-size: cover;
+}
+
+.flag:hover {
+    background: url("./assets/flag.png") !important;
     background-size: cover !important;
 }
 
@@ -206,25 +255,45 @@ body {
     background: grey;
 }
 
+@media screen and (max-width: 800px) {
+    .header {
+        column-gap: 10px;
+    }
+}
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
     .field {
         width: 90%;
         font-size: 12px;
     }
 
+    .cell {
+        border-radius: 1px;
+    }
+
     .header {
         width: 90%;
-        font-size: 25px;
+        column-gap: 5px;
     }
 
     .aside {
-        margin: 20px auto;
+        margin: 10px auto;
         min-width: 90%;
         float: none;
         font-size: 12px;
         padding: 5px;
         row-gap: 5px;
+        flex-direction: row;
+        justify-content: space-around;
+          }
+
+    .reset {
+        width: 45px;
+        height: 45px;
+    }
+
+    .set-mines__input {
+        width: 30%;
     }
 
     .container {
@@ -233,8 +302,7 @@ body {
 
     .buttons {
         text-align: center;
-        flex-direction: row;
-        column-gap: 5px;
+        row-gap: 1px;
     }
 
     .theme {

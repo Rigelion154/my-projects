@@ -1,37 +1,59 @@
-// import smile from '../assets/smile.png'
-
-
-// console.log(smile)
 export function getHtmlElements() {
   document.body.innerHTML = `
       <aside class="aside">
         <div class="buttons">
-          <h2 class="buttons__title">Field Size</h2>
-          <button class="small button active button-active">10x10</button>
-          <button class="medium button">15x15</button>
-          <button class="large button">25x25</button>
+          <h3 class="buttons__title">Field Size</h3>
+          <div class="buttons__wrapper">
+            <button class="small button active button-active">10x10</button>
+            <button class="medium button">15x15</button>
+            <button class="large button">25x25</button>
+          </div>
         </div>
+          <div class="set-mines">
+            <h3 class="set-mines__title">Mines Count</h3>
+            <input class="set-mines__input" type="number" value="10" min="10" max="99" placeholder="min 10 max 99">
+            <button class="set-mines__button button" type="submit">Ok</button>
+          </div>
+<!--        </div>-->
+      <div class="second-row">
         <div class="theme">
-        <h2 class="theme__title">Theme</h2>
-<!--        <button class="light button">Light</button>-->
-        <button class="dark button">Dark</button>
+          <h3 class="theme__title">Theme</h3>
+          <button class="dark button">Dark</button>
         </div>
         <div class="score button">Score</div>
+      </div>
+
       </aside>
       <div class="container">
         <div class="header">
-          <div class="center">
-            <div class="timer">000 </div>
-            <img src= '' alt="smile" class="reset">
+          <div class="time">
+            <h5 class="time__title">Time</h5>
+            <div class="timer"></div>
+          </div>
+          <div class="steps">
+            <h5 class="steps__title">Step</h5>
             <div class="progress"></div>
           </div>
+          <div class="center">
+            <img src= '' alt="smile" class="reset">
+          </div>
+          <div class="mines">
+            <h5 class="mines__title">Mines</h5>
+            <div class="mines__count">10</div>
+          </div>
+          <div class="flags">
+            <h5 class="flags__title">Flags</h5>
+            <div class="flags__count">0</div>
+          </div>
+          
         </div>
+        <div class="field-wrapper">
         <div class="field"></div>
+</div>
         <div class="popup-loose popup">You Loose</div>
         <div class="popup-win popup">You Win</div>
       </div>
 `
-  // document.querySelector('.reset').src = `${smile}`
 }
 
 getHtmlElements()
