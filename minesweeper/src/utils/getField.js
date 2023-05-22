@@ -1,8 +1,6 @@
 const field= document.createElement('div')
 
 export function getField (size) {
-  // const field= document.createElement('div')
-  // const field = document.querySelector('.field')
   field.className = 'field'
   field.innerHTML = ''
   while (size) {

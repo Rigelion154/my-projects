@@ -1,6 +1,7 @@
 export function getHtmlElements() {
   document.body.innerHTML = `
-      <aside class="aside">
+      <div class="container">
+       <aside class="aside">
         <div class="buttons">
           <h3 class="buttons__title">Field Size</h3>
           <div class="buttons__wrapper">
@@ -14,17 +15,16 @@ export function getHtmlElements() {
             <input class="set-mines__input" type="number" value="10" min="10" max="99" placeholder="min 10 max 99">
             <button class="set-mines__button button" type="submit">Ok</button>
           </div>
-<!--        </div>-->
-      <div class="second-row">
+        <div class="second-row">
         <div class="theme">
           <h3 class="theme__title">Theme</h3>
           <button class="dark button">Dark</button>
+          <div class="score button">Score</div>
         </div>
-        <div class="score button">Score</div>
-      </div>
 
+     </div>
+        
       </aside>
-      <div class="container">
         <div class="header">
           <div class="time">
             <h5 class="time__title">Time</h5>
@@ -48,10 +48,23 @@ export function getHtmlElements() {
           
         </div>
         <div class="field-wrapper">
-        <div class="field"></div>
-</div>
+        </div>
         <div class="popup-loose popup">You Loose</div>
         <div class="popup-win popup">You Win</div>
+        <div class="score-menu">
+          <ol class="score__list">
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+            <li class="score__item"></li>
+</ol>
+        </div>
       </div>
 `
 }

@@ -4,6 +4,7 @@ import {sizeButtonsHandler} from "./buttonsHandler";
 import {getTheme} from "../utils/theme";
 import {Field} from "./Field";
 import {getField} from "../utils/getField";
+import {getStorageScore} from "../utils/score";
 
 export function fieldSizeHandler() {
   window.addEventListener('resize', () => {
@@ -22,6 +23,7 @@ function gameSettings(field) {
   document.querySelector('.popup-win').style.zIndex = '-1'
   document.querySelector('.popup-win').style.opacity = '0'
   document.querySelector('.reset').src = `${smile}`
+  document.querySelector('.score-menu').classList.remove('menu-open')
   clearInterval(interval)
   field.getField()
   resetButtonHandler()
@@ -34,6 +36,7 @@ export function startGame() {
   const small = document.querySelector('.small')
   const large = document.querySelector('.large')
   const minesInput = document.querySelector('.set-mines__input')
+  getStorageScore ()
   if (minesInput.value === '') minesInput.value = 10
   if (small.classList.contains('active')) {
     getField(100)
@@ -54,4 +57,5 @@ export function startGame() {
       el.classList.add('big')
     })
   }
+
 }

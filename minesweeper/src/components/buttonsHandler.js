@@ -41,4 +41,7 @@ export function sizeButtonsHandler() {
     else startGame()
   })
 
+
+
+
 }
