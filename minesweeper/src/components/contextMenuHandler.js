@@ -12,7 +12,7 @@ export function contextHandler() {
         mines.textContent = `${mines.textContent - 1}`
         flags.textContent = `${Number(flags.textContent) + 1}`
       }
-      if (!e.target.classList.contains('flag')) {
+      if (!e.target.classList.contains('flag') && !e.target.classList.contains('open') && !e.target.classList.contains('field')) {
         mines.textContent = `${Number(mines.textContent)+ 1}`
         flags.textContent = `${Number(flags.textContent)- 1}`
       }
