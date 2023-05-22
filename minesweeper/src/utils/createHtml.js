@@ -49,7 +49,7 @@ export function getHtmlElements() {
         </div>
         <div class="field-wrapper">
         </div>
-        <div class="popup-loose popup">You Loose</div>
+        <div class="popup-loose popup">Game over. Try again!</div>
         <div class="popup-win popup">You Win</div>
         <div class="score-menu">
           <ol class="score__list">

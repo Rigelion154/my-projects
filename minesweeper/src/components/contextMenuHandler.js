@@ -17,5 +17,6 @@ export function contextHandler() {
         flags.textContent = `${Number(flags.textContent)- 1}`
       }
     }
+
   })
 }

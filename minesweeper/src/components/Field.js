@@ -98,6 +98,8 @@ export class Field {
         this.cells[bomb].classList.add('bomb')
         this.cells[bomb].classList.add('open')
       })
+      document.querySelector('.popup-win').textContent = `Hooray! You found all mines in ${document.querySelector('.timer').textContent}
+       seconds and ${this.progress.textContent} moves!`
       document.querySelector('.popup-win').style.zIndex = '1'
       document.querySelector('.popup-win').style.opacity = '1'
       clearInterval(interval)
