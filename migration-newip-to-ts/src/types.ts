@@ -40,6 +40,21 @@ enum Status {
     ERROR = 'error',
 }
 
+interface ISrcNews {
+    status: Status;
+    sources: Source[];
+}
+
+type Source = {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    category: string;
+    language: string;
+    country: string;
+};
+
 type CallbackType<T> = (data?: T) => void;
 
-export { GetRespType, IResponse, CallbackType, IDataNews, Article };
+export { GetRespType, IResponse, CallbackType, IDataNews, Article, ISrcNews, Source };
