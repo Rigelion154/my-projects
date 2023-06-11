@@ -3,6 +3,7 @@ import { CallbackType, GetRespType } from '../../types';
 class Loader {
     baseLink: string;
     options: { apiKey: string };
+
     constructor(baseLink: string, options: { apiKey: string }) {
         this.baseLink = baseLink;
         this.options = options;
@@ -39,7 +40,6 @@ class Loader {
     }
 
     load<T>(method: string, endpoint: string, callback: CallbackType<T>, options = {}) {
-        console.log(callback);
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
