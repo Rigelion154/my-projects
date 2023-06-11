@@ -21,7 +21,7 @@ interface IResponse {
 interface IDataNews {
     status: Status;
     totalResults: number;
-    articles: Article[];
+    articles: Array<Article>;
 }
 
 type Article = {
@@ -34,15 +34,9 @@ type Article = {
     url: string;
     urlToImage: string;
 };
-
-enum Status {
-    OK = 'ok',
-    ERROR = 'error',
-}
-
 interface ISrcNews {
     status: Status;
-    sources: Source[];
+    sources: Array<Source>;
 }
 
 type Source = {
@@ -54,7 +48,10 @@ type Source = {
     language: string;
     country: string;
 };
-
+enum Status {
+    OK = 'ok',
+    ERROR = 'error',
+}
 type CallbackType<T> = (data?: T) => void;
 
 export { GetRespType, IResponse, CallbackType, IDataNews, Article, ISrcNews, Source };
