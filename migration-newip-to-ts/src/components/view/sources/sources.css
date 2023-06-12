@@ -1,8 +1,8 @@
 .sources {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     width: 100%;
-    height: 120px;
+    height: 200px;
     overflow: auto;
     align-items: center;
     font: 300 1em 'Fira Sans', sans-serif;
@@ -31,4 +31,13 @@
 .source__item-name {
     font-weight: 400;
     white-space: nowrap;
+}
+
+@media screen and (max-width: 500px) {
+    .sources {
+        justify-content: center;
+    }
+    .source__item {
+        padding: 0.5em 1em;
+    }
 }

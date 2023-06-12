@@ -15,13 +15,20 @@ const baseConfig = {
             },
 
             { test: /\.ts$/i, use: 'ts-loader' },
+            {
+                test: /\.(mp3?|wav|png|ogg|ico|svg|jpe?g|mpe?g)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/[name][hash][ext]',
+                },
+            }
         ],
     },
     resolve: {
         extensions: ['.js', '.ts'],
     },
     output: {
-        filename: 'index.ts',
+        filename: 'index.js',
         path: path.resolve(__dirname, '../dist'),
     },
     plugins: [
