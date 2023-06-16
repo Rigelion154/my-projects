@@ -11,7 +11,7 @@
     --index: calc(1vw + 1vh);
 }
 
-body {
+.container {
     color: var(--color-text);
     display: flex;
     background: var(--color-primary);
