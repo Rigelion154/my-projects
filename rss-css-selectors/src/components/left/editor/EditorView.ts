@@ -1,12 +1,12 @@
-import ComponentCreator from '../../utils/ComponentCreator';
+import ComponentCreator from '../../../utils/ComponentCreator';
 import { DataItem } from '../../../types';
 import EditorLeftView from './editorLeft/EditorLeftView';
 import EditorRightView from './editorRight/EditorRightView';
 
 export default class EditorView extends ComponentCreator {
-    editorLeft: ComponentCreator;
-    editorRight: ComponentCreator;
-    constructor(data: DataItem[], index: number) {
+    editorLeft: EditorLeftView;
+    editorRight: EditorRightView;
+    constructor() {
         const options = {
             tagName: 'section',
             classNames: ['editor'],
@@ -14,11 +14,14 @@ export default class EditorView extends ComponentCreator {
             parentNode: undefined,
         };
         super(options);
-        this.editorLeft = new EditorLeftView(data, index);
-        this.editorRight = new EditorRightView(data, index);
+        this.editorLeft = new EditorLeftView();
+        this.editorRight = new EditorRightView();
         this.configureView();
     }
     configureView() {
         this.appendChildren([this.editorLeft, this.editorRight]);
+    }
+    setTextContent(data: DataItem[], index: number) {
+        this.editorRight.setTextContent(data, index);
     }
 }

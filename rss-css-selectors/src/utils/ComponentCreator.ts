@@ -1,10 +1,10 @@
-import { ComponentOptions } from '../../types';
+import { ComponentOptions } from '../types';
 
 export default class ComponentCreator {
-    private node: HTMLElement;
+    node: HTMLElement;
     // options = { tagName: 'div', classNames: [], textContent: '', parentNode: undefined };
     // options: ComponentOptions;
-    constructor({ tagName = 'div', classNames = [], textContent = '', parentNode }: ComponentOptions) {
+    constructor({ tagName = 'div', classNames = [], textContent = '', parentNode = undefined }: ComponentOptions) {
         this.node = document.createElement(tagName);
         this.node.classList.add(...classNames);
         this.node.textContent = textContent;
@@ -43,5 +43,3 @@ export default class ComponentCreator {
         this.node.remove();
     }
 }
-
-// export { ComponentCreator };

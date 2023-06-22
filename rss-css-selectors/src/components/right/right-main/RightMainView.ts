@@ -1,4 +1,4 @@
-import ComponentCreator from '../../utils/ComponentCreator';
+import ComponentCreator from '../../../utils/ComponentCreator';
 import { DataItem } from '../../../types';
 
 export default class RightMainView extends ComponentCreator {
@@ -12,9 +12,7 @@ export default class RightMainView extends ComponentCreator {
 
     constructor(data: DataItem[], index: number) {
         const options = {
-            tagName: 'div',
             classNames: ['right__main'],
-            textContent: '',
             parentNode: undefined,
         };
         super(options);
@@ -22,45 +20,34 @@ export default class RightMainView extends ComponentCreator {
         this.selectorName = new ComponentCreator({
             tagName: 'h3',
             classNames: ['right__selector-name'],
-            textContent: ``,
             parentNode: this.getNode(),
         });
         this.helpTitle = new ComponentCreator({
             tagName: 'h2',
             classNames: ['right__help'],
-            textContent: ``,
             parentNode: this.getNode(),
         });
         this.syntax = new ComponentCreator({
             tagName: 'h3',
             classNames: ['right__syntax'],
-            textContent: ``,
             parentNode: this.getNode(),
         });
         this.help = new ComponentCreator({
-            tagName: 'div',
             classNames: ['right__hint'],
-            textContent: ``,
             parentNode: this.getNode(),
         });
         this.examples = new ComponentCreator({
-            tagName: 'div',
             classNames: ['right__examples'],
-            textContent: ``,
             parentNode: this.getNode(),
         });
         this.example = [];
         data[index].examples.forEach(() => {
             const example = new ComponentCreator({
-                tagName: 'div',
                 classNames: ['example'],
-                textContent: '',
                 parentNode: this.examples.getNode(),
             });
             this.example.push(example);
         });
-
-        this.setTextContent(data, index);
     }
 
     setTextContent(data: DataItem[], index: number) {

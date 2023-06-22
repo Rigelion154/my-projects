@@ -1,30 +1,32 @@
 import { LeftView } from './left/leftView';
 import { RightView } from './right/RightView';
-import ComponentCreator from './utils/ComponentCreator';
+import ComponentCreator from '../utils/ComponentCreator';
 import { data } from '../data/data';
+import { compareAnswer } from '../utils/setHoverHtmlMarkup';
 
 class App {
     leftView: LeftView;
     rightView: RightView;
     index: number;
-
+    answers: ComponentCreator;
     constructor() {
         this.index = 0;
         this.leftView = new LeftView(data, this.index);
         this.rightView = new RightView(data, this.index);
-        // this.createView();
+        this.answers = new ComponentCreator({
+            classNames: ['answers'],
+        });
+        this.answers.getNode().innerHTML = data[this.index].selector;
         this.setListeners();
     }
 
     createView() {
         const container = new ComponentCreator({
-            tagName: 'div',
             classNames: ['container'],
             parentNode: document.body,
-            textContent: '',
         });
-
         container.appendChildren([this.leftView, this.rightView]);
+        console.log(Array.from(this.answers.getNode().childNodes));
     }
 
     setListeners() {
@@ -40,12 +42,30 @@ class App {
             if (this.index < 1) this.index = 0;
             this.setTextContent();
         });
+        const input = this.leftView.editor.editorLeft.input.getNode() as HTMLInputElement;
+        const tags = this.leftView.editor.editorRight.mainTags.getNode() as HTMLElement;
+
+        input.addEventListener('keyup', (event) => {
+            if (event.code === 'Enter') {
+                console.log(Array.from(this.answers.getNode().childNodes));
+                console.log(Array.from(tags.querySelectorAll(input.value)));
+                if (
+                    compareAnswer(
+                        Array.from(this.answers.getNode().childNodes),
+                        Array.from(tags.querySelectorAll(input.value))
+                    )
+                ) {
+                    this.index++;
+                    this.setTextContent();
+                }
+            }
+        });
     }
 
     setTextContent() {
-        this.rightView.header.setTextContent(data, this.index);
-        this.rightView.main.setTextContent(data, this.index);
-        this.leftView.title.addTextContent(data[this.index].doThis);
+        this.leftView.setTextContent(data, this.index);
+        this.rightView.setTextContent(data, this.index);
+        this.answers.getNode().innerHTML = data[this.index].selector;
     }
 }
 

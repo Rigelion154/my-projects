@@ -1,8 +1,8 @@
-import ComponentCreator from '../../../utils/ComponentCreator';
-import { DataItem } from '../../../../types';
+import ComponentCreator from '../../../../utils/ComponentCreator';
 
 export default class EditorLeftView extends ComponentCreator {
-    constructor(data: DataItem[], index: number) {
+    input: ComponentCreator;
+    constructor() {
         const options = {
             tagName: 'section',
             classNames: ['editor__left'],
@@ -10,9 +10,31 @@ export default class EditorLeftView extends ComponentCreator {
             parentNode: undefined,
         };
         super(options);
-        // this.configureView();
+        this.input = new ComponentCreator({
+            tagName: 'input',
+            classNames: ['editor__input'],
+        });
+        this.configureView();
     }
-    // configureView() {
-    //     this.appendChildren([this.header, this.main]);
-    // }
+    configureView() {
+        const header = new ComponentCreator({
+            classNames: ['editor__left-header'],
+            parentNode: this.getNode(),
+        });
+        header.getNode().innerHTML = `<span>CSS Editor</span><span>style.css</span>`;
+
+        const main = new ComponentCreator({
+            classNames: ['editor__left-main'],
+            parentNode: this.getNode(),
+        });
+
+        const mainNumbers = new ComponentCreator({
+            classNames: ['editor__left-numbers'],
+            parentNode: main.getNode(),
+        });
+        for (let i = 1; i <= 15; i += 1) {
+            mainNumbers.getNode().innerHTML += `<span>${i}</span>`;
+        }
+        main.append(this.input);
+    }
 }

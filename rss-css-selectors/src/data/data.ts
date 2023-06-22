@@ -4,7 +4,7 @@ export const data: DataItem[] = [
     {
         id: 0,
         doThis: 'Select the plates',
-        selector: 'plate',
+        selector: `<plate>< plate /></plate><plate>< plate/ ></plate>`,
         syntax: 'A',
         helpTitle: 'Select elements by their type',
         selectorName: 'Type Selector',
@@ -15,15 +15,12 @@ export const data: DataItem[] = [
             '<strong>div</strong> selects all <tag>div</tag> elements.',
             '<strong>p</strong> selects all <tag>p</tag> elements.',
         ],
-        boardMarkup: `
-    <plate/>
-    <plate/>
-    `,
+        boardMarkup: `<plate>< plate /></plate><plate>< plate/ ></plate>`,
     },
     {
         id: 1,
         doThis: 'Select the bento boxes',
-        selector: 'bento',
+        selector: '<bento>< bento /></bento><bento>< bento /></bento>',
         syntax: 'A',
         helpTitle: 'Select elements by their type',
         selectorName: 'Type Selector',
@@ -34,11 +31,7 @@ export const data: DataItem[] = [
             '<strong>div</strong> selects all <tag>div</tag> elements.',
             '<strong>p</strong> selects all <tag>p</tag> elements.',
         ],
-        boardMarkup: `
-    <bento/>
-    <plate/>
-    <bento/>
-   `,
+        boardMarkup: `<bento>< bento /></bento><plate>< plate /></plate><bento>< bento /></bento>`,
     },
     {
         id: 2,
@@ -54,11 +47,7 @@ export const data: DataItem[] = [
             '<strong>#cool</strong> selects any element with <strong>id="cool"</strong>',
             '<strong>ul#long</strong> selects <tag>ul id="long"</tag>',
         ],
-        boardMarkup: `
-    <plate id="fancy"/>
-    <plate/>
-    <bento/>
-    `,
+        boardMarkup: `<div class="plate" id="fancy">< plate id="fancy" /></div><div class="plate">< plate/ ></div><div class="bento">< bento /></div>`,
     },
     {
         id: 3,
@@ -75,11 +64,13 @@ export const data: DataItem[] = [
             '<strong>#fancy&nbsp;&nbsp;span</strong> selects any <tag>span</tag> elements that are inside of the element with <strong>id="fancy"</strong>',
         ],
         boardMarkup: `
-    <bento/>
-    <plate>
-      <apple/>
-    </plate>
-    <apple/>
+             <bento class="bento">< bento /></bento>
+             <plate class="plate">
+             < plate >
+                <apple class="apple">< apple /></apple>
+             < /plate >
+            </plate>
+            <apple class="apple">< apple /></apple>
     `,
     },
     {
@@ -245,3 +236,5 @@ export const data: DataItem[] = [
     </plate>`,
     },
 ];
+
+export const db = [{ selector: 'plato' }, { selector: 'plato', child: [{ selector: 'benito' }] }];

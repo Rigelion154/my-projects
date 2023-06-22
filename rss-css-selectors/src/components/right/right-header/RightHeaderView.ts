@@ -1,4 +1,4 @@
-import ComponentCreator from '../../utils/ComponentCreator';
+import ComponentCreator from '../../../utils/ComponentCreator';
 import { DataItem } from '../../../types';
 
 export default class RightHeaderView extends ComponentCreator {
@@ -8,10 +8,7 @@ export default class RightHeaderView extends ComponentCreator {
     index: number;
     constructor(data: DataItem[], index: number) {
         const options = {
-            tagName: 'div',
             classNames: ['right__header'],
-            textContent: '',
-            parentNode: undefined,
         };
         super(options);
         this.index = index;

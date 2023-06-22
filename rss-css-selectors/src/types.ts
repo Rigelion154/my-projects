@@ -11,9 +11,9 @@ type DataItem = {
 };
 
 type ComponentOptions = {
-    tagName: string;
-    classNames: string[];
-    textContent: string | null;
+    tagName?: string;
+    classNames?: string[];
+    textContent?: string | null;
     parentNode?: HTMLElement;
 };
 

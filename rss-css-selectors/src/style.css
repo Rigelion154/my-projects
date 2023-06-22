@@ -1,1 +1,3 @@
-@import url('./styles/base.css');
+@import './styles/base.css';
+
+@import "./styles/components/editor/editor-left.css";

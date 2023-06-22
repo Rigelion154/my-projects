@@ -1,0 +1,107 @@
+.editor {
+    display: flex;
+}
+
+.editor__left,
+.editor__right {
+    width: 50%;
+    height: 100%;
+}
+
+.editor__left-header,
+.editor__right-header {
+    width: 100%;
+    height: 10%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.editor__left-main,
+.editor__right-main {
+    width: 100%;
+    height: 90%;
+    color: var(--color-primary);
+    background-color: rgba(255, 255, 255, .9);
+    /*background-color: var(--color-text);*/
+}
+
+.editor__left-main {
+    display: flex;
+}
+
+.editor__input {
+    width: 80%;
+    height: 6%;
+}
+
+.editor__right-main {
+    display: flex;
+    color: var(--color-text);
+    background-color: var(--color-primary);
+}
+
+.editor__left-numbers,
+.editor__right-numbers {
+    height: 100%;
+    width: 10%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+    background-color: var(--color-secondary);
+}
+
+.editor__right-tags *{
+    display: block;
+    margin-left: 20px;
+}
+
+.table {
+    display: flex;
+    column-gap: 20px;
+}
+
+.table plate {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0;
+}
+
+.table bento {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid red;
+    cursor: pointer;
+    font-size: 0;
+}
+
+.table apple {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0;
+}
+
+/*plate:hover {*/
+/*    background: red;*/
+/*}*/
+
+.check {
+    background: red;
+}
+
+
+
+
+

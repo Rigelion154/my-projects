@@ -1,18 +1,14 @@
-import ComponentCreator from '../../utils/ComponentCreator';
-import { DataItem } from '../../../types';
+import ComponentCreator from '../../../utils/ComponentCreator';
 
 export default class TableView extends ComponentCreator {
-    constructor(data: DataItem[], index: number) {
+    constructor() {
         const options = {
             tagName: 'section',
             classNames: ['table'],
-            textContent: '',
-            parentNode: undefined,
         };
         super(options);
-        // this.configureView();
     }
-    // configureView() {
-    //     this.appendChildren([this.header, this.main]);
-    // }
+    configureView(callback: () => void) {
+        this.addCallBack(callback);
+    }
 }
