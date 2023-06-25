@@ -1,4 +1,4 @@
-import { App } from '../components/app';
+import { App } from '../app';
 import RightHeaderView from '../components/right/right-header/RightHeaderView';
 import { data } from '../data/data';
 

@@ -1,7 +1,7 @@
 import EditorRightView from '../components/left/editor/editorRight/EditorRightView';
 import EditorLeftView from '../components/left/editor/editorLeft/EditorLeftView';
 import { data } from '../data/data';
-import { App } from '../components/app';
+import { App } from '../app';
 
 export class InputHandler {
     app: App;
@@ -18,6 +18,7 @@ export class InputHandler {
         const button = this.input.button.getNode() as HTMLButtonElement;
         const tagsElement = this.tags.mainTags.getNode() as HTMLElement;
         const table = this.app.leftView.table.container.getNode();
+        const reset = this.app.rightView.resetButton.getNode();
         const handleEvent = (): boolean | void => {
             const firstList = tagsElement.querySelectorAll(inputElement.value);
             const secondList = tagsElement.querySelectorAll(data[this.app.index].selector);
@@ -33,6 +34,7 @@ export class InputHandler {
                         table.classList.remove('done-right');
                     }
                 });
+                this.app.rightView.checkLevel(this.app.index);
                 setTimeout(() => {
                     const newIndex = this.app.index + 1;
                     this.app.updateIndex(newIndex);
@@ -51,6 +53,11 @@ export class InputHandler {
             }
         };
 
+        reset.addEventListener('click', () => {
+            this.app.updateIndex(0);
+            this.app.localStorageManager.removeProgress();
+            this.app.initialize();
+        });
         button.addEventListener('click', handleEvent);
         inputElement.addEventListener('keyup', handleKeyUp);
     }

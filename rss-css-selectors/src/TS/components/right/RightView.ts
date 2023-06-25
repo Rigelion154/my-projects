@@ -7,13 +7,11 @@ class RightView extends ComponentCreator {
     header: RightHeaderView;
     main: RightMainView;
     levels: ComponentCreator;
-
+    resetButton: ComponentCreator;
     constructor(data: DataItem[], index: number) {
         const options = {
             tagName: 'section',
             classNames: ['right-side'],
-            textContent: '',
-            parentNode: undefined,
         };
         super(options);
         this.header = new RightHeaderView(data, index);
@@ -21,6 +19,11 @@ class RightView extends ComponentCreator {
         this.levels = new ComponentCreator({
             tagName: 'ul',
             classNames: ['right__levels'],
+        });
+        this.resetButton = new ComponentCreator({
+            tagName: 'button',
+            textContent: 'Reset Progress',
+            classNames: ['button', 'right__reset'],
         });
         this.configureView(data);
         this.setTextContent(data, index);
@@ -31,11 +34,19 @@ class RightView extends ComponentCreator {
             const level = new ComponentCreator({
                 tagName: 'li',
                 classNames: ['right__level'],
+                textContent: `${el.id} Level`,
                 parentNode: this.levels.getNode(),
             });
-            level.getNode().textContent = `${el.id} Level`;
+            const isComplete = new ComponentCreator({
+                tagName: 'span',
+                classNames: ['right__complete'],
+            });
+            isComplete.getNode().innerHTML = '&#10004;';
+            level.getNode().dataset.complete = 'false';
+            level.getNode().insertAdjacentElement('afterbegin', isComplete.getNode());
+            this.levels.appendChildren([level]);
         });
-        this.appendChildren([this.header, this.main, this.levels]);
+        this.appendChildren([this.header, this.main, this.levels, this.resetButton]);
     }
 
     setTextContent(data: DataItem[], index: number) {
@@ -43,6 +54,12 @@ class RightView extends ComponentCreator {
         this.header.setTextContent(data, index);
         Array.from(this.levels.getNode().children).forEach((level, i) => {
             level.classList.toggle('active', i === index);
+        });
+    }
+
+    checkLevel(index: number) {
+        Array.from(this.levels.getNode().children).forEach((level, i) => {
+            if (index === i) (level as HTMLElement).dataset.complete = 'true';
         });
     }
 }

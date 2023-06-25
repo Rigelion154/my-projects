@@ -5,9 +5,6 @@ export default class RightMainView extends ComponentCreator {
     selectorName: ComponentCreator;
     helpTitle: ComponentCreator;
     syntax: ComponentCreator;
-    // help: ComponentCreator;
-    // examples: ComponentCreator;
-    // example: ComponentCreator[];
     index: number;
 
     constructor(data: DataItem[], index: number) {
@@ -32,22 +29,6 @@ export default class RightMainView extends ComponentCreator {
             classNames: ['right__syntax'],
             parentNode: this.getNode(),
         });
-        // this.help = new ComponentCreator({
-        //     classNames: ['right__hint'],
-        //     parentNode: this.getNode(),
-        // });
-        // this.examples = new ComponentCreator({
-        //     classNames: ['right__examples'],
-        //     parentNode: this.getNode(),
-        // });
-        // this.example = [];
-        // data[index].examples.forEach(() => {
-        //     const example = new ComponentCreator({
-        //         classNames: ['example'],
-        //         parentNode: this.examples.getNode(),
-        //     });
-        //     this.example.push(example);
-        // });
     }
 
     setTextContent(data: DataItem[], index: number) {
@@ -60,13 +41,5 @@ export default class RightMainView extends ComponentCreator {
         data[index].syntax
             ? (this.syntax.getNode().innerHTML = data[index].syntax)
             : (this.syntax.getNode().innerText = '');
-        // data[index].help ? (this.help.getNode().innerHTML = data[index].help) : (this.help.getNode().innerText = '');
-        // data[index].examples
-        //     ? this.example.forEach((el, elIndex) => {
-        //           data[index].examples[elIndex]
-        //               ? (el.getNode().innerHTML = data[index].examples[elIndex])
-        //               : (el.getNode().innerText = '');
-        //       })
-        //     : (this.examples.getNode().innerText = '');
     }
 }

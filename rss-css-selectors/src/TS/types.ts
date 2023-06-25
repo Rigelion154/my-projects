@@ -17,4 +17,9 @@ type ComponentOptions = {
     parentNode?: HTMLElement;
 };
 
-export { DataItem, ComponentOptions };
+interface ILevel {
+    id: number;
+    complete: string;
+}
+
+export { DataItem, ComponentOptions, ILevel };
