@@ -2,7 +2,7 @@ import { DataItem } from '../types';
 
 export const data: DataItem[] = [
     {
-        id: 0,
+        id: 1,
         doThis: 'Select the boxes',
         selector: `box`,
         syntax: 'Example A',
@@ -18,7 +18,7 @@ export const data: DataItem[] = [
         boardMarkup: `<box class="task">< box /></box><box class="task">< box/ ></box>`,
     },
     {
-        id: 1,
+        id: 2,
         doThis: 'Select the ammo-boxes',
         selector: 'ammo-box',
         syntax: 'Example A',
@@ -34,7 +34,7 @@ export const data: DataItem[] = [
         boardMarkup: `<ammo-box class="task">< ammo-box /></ammo-box><box>< box /></box><ammo-box class="task">< ammo-box /></ammo-box>`,
     },
     {
-        id: 2,
+        id: 3,
         doThis: 'Select the ammo-box with magazines',
         // selector: `<plate id="fancy">< plate id="fancy" /></plate>`,
         selector: `#magazines`,
@@ -51,7 +51,7 @@ export const data: DataItem[] = [
         boardMarkup: `<ammo-box class="task" id="magazines">< ammo-box id="magazines" /></ammo-box><ammo-box>< ammo-box /></ammo-box><box>< box /></box>`,
     },
     {
-        id: 3,
+        id: 4,
         helpTitle: 'Select an element inside another element',
         selectorName: 'Descendant Selector',
         doThis: 'Select the gun in a ammo-box',
@@ -76,7 +76,7 @@ export const data: DataItem[] = [
     `,
     },
     {
-        id: 4,
+        id: 5,
         doThis: 'Pick the gun in the box of magazines',
         selector: '#magazines gun',
         helpTitle: 'Combine the Descendant & ID Selectors',
@@ -102,7 +102,7 @@ export const data: DataItem[] = [
     `,
     },
     {
-        id: 5,
+        id: 6,
         doThis: 'Select the shotguns',
         selector: '.shotgun',
         selectorName: 'Class Selector',
@@ -123,7 +123,7 @@ export const data: DataItem[] = [
     `,
     },
     {
-        id: 6,
+        id: 7,
         doThis: 'Select the shotgun ammo',
         selector: 'ammo.shotgun',
         helpTitle: 'Combine the Class Selector',
@@ -154,7 +154,7 @@ export const data: DataItem[] = [
 `,
     },
     {
-        id: 7,
+        id: 8,
         doThis: 'Select the shotgun ammo in the ammo-boxes',
         selector: 'ammo-box ammo.shotgun',
         syntax: 'Put your back into it!',
@@ -186,7 +186,7 @@ export const data: DataItem[] = [
     `,
     },
     {
-        id: 8,
+        id: 9,
         doThis: 'Select all the boxes and ammo-boxes',
         selector: 'box,ammo-box',
         selectorName: 'Comma Combinator',
@@ -221,7 +221,7 @@ export const data: DataItem[] = [
     `,
     },
     {
-        id: 9,
+        id: 10,
         doThis: 'Select all the things!',
         selector: '*',
         selectorName: 'The Universal Selector',
@@ -246,7 +246,7 @@ export const data: DataItem[] = [
     `,
     },
     {
-        id: 10,
+        id: 11,
         doThis: 'Select everything on a plate',
         selector: 'plate *',
         syntax: 'Example A&nbsp;&nbsp;*',

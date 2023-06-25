@@ -53,8 +53,8 @@
 }
 
 .table__container ammo {
-    width: calc(var(--index) * 1.3);
-    height: calc(var(--index) * 1.3);
+    width: calc(var(--index) * 1.5);
+    height: calc(var(--index) * 1.5);
     background-image: url("../../assets/ammo.png");
     background-size: cover;
     scale: .75;
@@ -77,8 +77,8 @@
 .table__container box ammo.shotgun,
 .table__container ammo-box ammo.shotgun{
     position: relative;
-    top: 25%;
-    left: 25%;
+    top: 20%;
+    left: 20%;
 }
 
 .table__container .shotgun {

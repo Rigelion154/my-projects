@@ -2,6 +2,9 @@
     width: 15vw;
     height: 100vh;
     font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
     background: var(--color-secondary);
 }
 
@@ -11,15 +14,32 @@
     justify-content: center;
     text-align: center;
     row-gap: 5px;
-    padding: 5px;
+    padding: 15px 5px 5px;
 }
 
 .right__title {
     width: 100%;
 }
 .right__main {
+    height: calc(var(--index) * 7);
     text-align: center;
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+}
+
+.right__levels {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+}
+
+.right__level {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.active {
+    background: #9857D3;
 }

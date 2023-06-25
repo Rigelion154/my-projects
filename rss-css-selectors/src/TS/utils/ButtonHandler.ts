@@ -25,5 +25,11 @@ export class ButtonHandler {
             if (prevIndex < 1) prevIndex = 0;
             this.app.updateIndex(prevIndex);
         });
+        const levels = Array.from(this.app.rightView.levels.getNode().children);
+        levels.forEach((level, i) => {
+            level.addEventListener('click', () => {
+                this.app.updateIndex(i);
+            });
+        });
     }
 }
