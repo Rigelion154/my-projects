@@ -3,8 +3,8 @@ import { DataItem } from '../types';
 export const data: DataItem[] = [
     {
         id: 0,
-        doThis: 'Select the plates',
-        selector: `<plate>< plate /></plate><plate>< plate/ ></plate>`,
+        doThis: 'Select the boxes',
+        selector: `box`,
         syntax: 'A',
         helpTitle: 'Select elements by their type',
         selectorName: 'Type Selector',
@@ -15,12 +15,12 @@ export const data: DataItem[] = [
             '<strong>div</strong> selects all <tag>div</tag> elements.',
             '<strong>p</strong> selects all <tag>p</tag> elements.',
         ],
-        boardMarkup: `<plate>< plate /></plate><plate>< plate/ ></plate>`,
+        boardMarkup: `<box class="task">< box /></box><box class="task">< box/ ></box>`,
     },
     {
         id: 1,
-        doThis: 'Select the bento boxes',
-        selector: '<bento>< bento /></bento><bento>< bento /></bento>',
+        doThis: 'Select the ammo-boxes',
+        selector: 'ammo-box',
         syntax: 'A',
         helpTitle: 'Select elements by their type',
         selectorName: 'Type Selector',
@@ -31,12 +31,13 @@ export const data: DataItem[] = [
             '<strong>div</strong> selects all <tag>div</tag> elements.',
             '<strong>p</strong> selects all <tag>p</tag> elements.',
         ],
-        boardMarkup: `<bento>< bento /></bento><plate>< plate /></plate><bento>< bento /></bento>`,
+        boardMarkup: `<ammo-box class="task">< ammo-box /></ammo-box><box>< box /></box><ammo-box class="task">< ammo-box /></ammo-box>`,
     },
     {
         id: 2,
-        doThis: 'Select the fancy plate',
-        selector: '#fancy',
+        doThis: 'Select the ammo-box with magazines',
+        // selector: `<plate id="fancy">< plate id="fancy" /></plate>`,
+        selector: `#magazines`,
         selectorName: 'ID Selector',
         helpTitle: 'Select elements with an ID',
         syntax: '#id',
@@ -47,14 +48,15 @@ export const data: DataItem[] = [
             '<strong>#cool</strong> selects any element with <strong>id="cool"</strong>',
             '<strong>ul#long</strong> selects <tag>ul id="long"</tag>',
         ],
-        boardMarkup: `<div class="plate" id="fancy">< plate id="fancy" /></div><div class="plate">< plate/ ></div><div class="bento">< bento /></div>`,
+        boardMarkup: `<ammo-box class="task" id="magazines">< ammo-box id="magazines" /></ammo-box><ammo-box>< ammo-box /></ammo-box><box>< box /></box>`,
     },
     {
         id: 3,
         helpTitle: 'Select an element inside another element',
         selectorName: 'Descendant Selector',
-        doThis: 'Select the apple on the plate',
-        selector: 'plate apple',
+        doThis: 'Select the gun in a ammo-box',
+        // selector: '<apple class="apple">< apple /></apple>',
+        selector: 'ammo-box gun',
         syntax: 'A&nbsp;&nbsp;B',
         help:
             'Selects all <strong>B</strong> inside of <strong>A</strong>. ' +
@@ -64,19 +66,19 @@ export const data: DataItem[] = [
             '<strong>#fancy&nbsp;&nbsp;span</strong> selects any <tag>span</tag> elements that are inside of the element with <strong>id="fancy"</strong>',
         ],
         boardMarkup: `
-             <bento class="bento">< bento /></bento>
-             <plate class="plate">
-             < plate >
-                <apple class="apple">< apple /></apple>
-             < /plate >
-            </plate>
-            <apple class="apple">< apple /></apple>
+             <box class="box">< box /></box>
+             <ammo-box class="ammo-box">
+             < ammo-box >
+                <gun class="gun task">< gun /></gun>
+             < /ammo-box >
+            </ammo-box>
+            <gun>< gun /></gun>
     `,
     },
     {
         id: 4,
-        doThis: 'Select the pickle on the fancy plate',
-        selector: '#fancy pickle',
+        doThis: 'Pick the gun in the box of magazines',
+        selector: '#magazines gun',
         helpTitle: 'Combine the Descendant & ID Selectors',
         syntax: '#id&nbsp;&nbsp;A',
         help: 'You can combine any selector with the descendent selector.',
@@ -84,21 +86,25 @@ export const data: DataItem[] = [
             '<strong>#cool&nbsp;span</strong> selects all <tag>span</tag>  elements that are inside of elements with <strong>id="cool"</strong>',
         ],
         boardMarkup: `
-    <bento>
+    <ammo-box>< ammo-box >
     <orange/>
-    </bento>
-    <plate id="fancy">
-      <pickle/>
-    </plate>
-    <plate>
-      <pickle/>
-    </plate>
+    </ammo-box>
+    <ammo-box id="magazines">
+        < ammo-box id="magazines" >
+            <gun class="gun task">< gun /></gun>
+        < /ammo-box >
+    </ammo-box>
+    <box>
+    < box >
+      <gun class="gun">< gun /></gun>
+    < /box >
+    </box>
     `,
     },
     {
         id: 5,
-        doThis: 'Select the small apples',
-        selector: '.small',
+        doThis: 'Select the shotguns',
+        selector: '.shotgun',
         selectorName: 'Class Selector',
         helpTitle: 'Select elements by their class',
         syntax: '.classname',
@@ -106,18 +112,20 @@ export const data: DataItem[] = [
             'The class selector selects all elements with that class attribute. Elements can only have one ID, but many classes.',
         examples: ['<strong>.neato</strong> selects all elements with <strong>class="neato"</strong>'],
         boardMarkup: `
-    <apple/>
-    <apple class="small"/>
-    <plate>
-      <apple class="small"/>
-    </plate>
-    <plate/>
+    <gun>< gun /></gun>
+    <gun class="shotgun task">< gun class="shotgun" /></gun>
+    <box>
+    < box >
+      <gun class="shotgun gun task">< gun class="shotgun" /></gun>
+    < /box >
+    </box>
+    <box>< box /></box>
     `,
     },
     {
         id: 6,
-        doThis: 'Select the small oranges',
-        selector: 'orange.small',
+        doThis: 'Select the shotgun ammo',
+        selector: 'ammo.shotgun',
         helpTitle: 'Combine the Class Selector',
         syntax: 'A.className',
         help: 'You can combine the class selector with other selectors, like the type selector.',
@@ -126,46 +134,61 @@ export const data: DataItem[] = [
             '<strong>#big.wide</strong> selects all elements with <strong>id="big"</strong> that also have <strong>class="wide"</strong>',
         ],
         boardMarkup: `
-    <apple/>
-    <apple class="small"/>
-    <bento>
-      <orange class="small"/>
-    </bento>
-    <plate>
-      <orange/>
-    </plate>
-    <plate>
-      <orange class="small"/>
-    </plate>`,
+    <gun class="gun">< gun /></gun>
+    <gun class="shotgun gun">< gun class="shotgun" /></gun>
+    <ammo-box>
+    < ammo-box >
+      <ammo class="shotgun task">< ammo class="shotgun" /></ammo>
+    < /ammo-box >
+    </ammo-box>
+    <box>
+    < box >
+     <ammo>< ammo /></ammo>
+    < /box >
+    </box>
+    <box>
+    < box >
+     <ammo class="shotgun task">< ammo class="shotgun" /></ammo>
+    < /box >
+    </box>
+`,
     },
     {
         id: 7,
-        doThis: 'Select the small oranges in the bentos',
-        selector: 'bento orange.small',
+        doThis: 'Select the shotgun ammo in the ammo-boxes',
+        selector: 'ammo-box ammo.shotgun',
         syntax: 'Put your back into it!',
         helpTitle: 'You can do it...',
         help: 'Combine what you learned in the last few levels to solve this one!',
         examples: [],
         boardMarkup: `
-    <bento>
-      <orange/>
-    </bento>
-    <orange class="small"/>
-    <bento>
-      <orange class="small"/>
-    </bento>
-    <bento>
-      <apple class="small"/>
-    </bento>
-    <bento>
-      <orange class="small"/>
-    </bento>
+    <ammo-box>
+    < ammo-box >
+      <ammo>< ammo /></ammo>
+    < /ammo-box >
+    </ammo-box>
+    <ammo class="shotgun">< ammo class="shotgun" /></ammo>
+    <ammo-box>
+    < ammo-box >
+      <ammo class="shotgun task">< ammo class="shotgun" /></ammo>
+    < /ammo-box >
+    </ammo-box>
+    <ammo-box>
+    < ammo-box >
+      <gun class="shotgun gun">< gun class="shotgun" /></gun>
+    < /ammo-box >
+    </ammo-box>
+    <ammo-box>
+    < ammo-box >
+      <ammo class="shotgun task">< ammo class="shotgun" /></ammo>
+    < /ammo-box >
+    </ammo-box>
     `,
     },
     {
         id: 8,
-        doThis: 'Select all the plates and bentos',
-        selector: 'plate,bento',
+        doThis: 'Select all the boxes and ammo-boxes',
+        selector: 'box,ammo-box',
         selectorName: 'Comma Combinator',
         helpTitle: 'Combine, selectors, with... commas!',
         syntax: 'A, B',
@@ -176,19 +199,25 @@ export const data: DataItem[] = [
             '<strong>a, p, div</strong> selects all <tag>a</tag>, <tag>p</tag> and <tag>div</tag> elements',
         ],
         boardMarkup: `
-    <pickle class="small"/>
-    <pickle/>
-    <plate>
-      <pickle/>
-    </plate>
-    <bento>
-      <pickle/>
-    </bento>
-    <plate>
-      <pickle/>
-    </plate>
-    <pickle/>
-    <pickle class="small"/>
+    <ammo class="shotgun">< ammo class="shotgun" /></ammo>
+    <ammo>< ammo /></ammo>
+    <box class="task">
+    < box >
+     <ammo>< ammo /></ammo>
+    < /box >
+    </box>
+    <ammo-box class="task">
+    < ammo-box >
+      <ammo>< ammo /></ammo>
+    < /ammo-box >
+    </ammo-box>
+    <box class="task">
+    < box >
+     <ammo>< ammo /></ammo>
+    < /box >
+    </box>
+    <ammo>< ammo /></ammo>
+    <ammo class="shotgun">< ammo class="shotgun" /></ammo>
     `,
     },
     {
@@ -201,15 +230,19 @@ export const data: DataItem[] = [
         help: 'You can select all elements with the universal selector! ',
         examples: ['<strong>p *</strong> selects any element inside all <tag>p</tag> elements.'],
         boardMarkup: `
-    <apple/>
-    <plate>
-      <orange class="small" />
-    </plate>
-    <bento/>
-    <bento>
-      <orange/>
-    </bento>
-    <plate id="fancy"/>
+    <gun class="gun task">< gun /></gun>
+    <box class="task">
+    < box >
+     <ammo>< ammo /></ammo>
+    < /box >
+    </box>
+    <ammo-box class="task">< ammo-box /></ammo-box>
+    <ammo-box class="task">
+    < ammo-box >
+      <ammo class="shotgun">< ammo class="shotgun" /></ammo>
+    < /ammo-box >
+    </ammo-box>
+    <ammo-box class="task" id="magazines">< ammo-box id="magazines" /></ammo-box>
     `,
     },
     {

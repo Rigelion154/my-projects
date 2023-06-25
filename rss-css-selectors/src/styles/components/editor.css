@@ -1,5 +1,11 @@
 .editor {
+    width: 60%;
+    /*height: 50%;*/
     display: flex;
+    background: var(--color-secondary);
+    border: 10px solid var(--color-secondary);
+    border-radius: 5px;
+    font-size: 1.2rem;
 }
 
 .editor__left,
@@ -24,16 +30,24 @@
     height: 90%;
     color: var(--color-primary);
     background-color: rgba(255, 255, 255, .9);
-    /*background-color: var(--color-text);*/
 }
 
 .editor__left-main {
     display: flex;
 }
 
+.editor__left-field {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    column-gap: 10px;
+    padding: 10px;
+}
+
 .editor__input {
-    width: 80%;
-    height: 6%;
+    width: 100%;
+
 }
 
 .editor__right-main {
@@ -54,52 +68,21 @@
     background-color: var(--color-secondary);
 }
 
-.editor__right-tags *{
+.editor__right-tags * {
     display: block;
     margin-left: 20px;
-}
-
-.table {
-    display: flex;
-    column-gap: 20px;
-}
-
-.table plate {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 5px solid white;
-    border-radius: 50%;
+    color: rgba(255, 255, 255, .6);
     cursor: pointer;
-    font-size: 0;
 }
 
-.table bento {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 5px solid red;
-    cursor: pointer;
-    font-size: 0;
+
+
+
+.editor__right-tags .check {
+    color: var(--color-text);
 }
 
-.table apple {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: red;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 0;
-}
 
-/*plate:hover {*/
-/*    background: red;*/
-/*}*/
-
-.check {
-    background: red;
-}
 
 
 

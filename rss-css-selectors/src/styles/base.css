@@ -1,3 +1,12 @@
+html {
+    /*font-size: 10px;*/
+    font-size: calc(var(--index) * .48);
+}
+
+body {
+    font-size: 2rem;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -18,38 +27,21 @@
 }
 
 .main {
-    width: 75vw;
+    width: 85vw;
     height: 100vh;
 }
 
-.main__wrapper {
+.main__container {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.main__game-field {
-    width: 200px;
-    height: 200px;
-    background: var(--color-text);
-}
-
-.editor {
-    width: 80%;
-    height: 50%;
-    background: var(--color-secondary);
-    border: 10px solid var(--color-secondary);
-    border-radius: 5px;
-}
-
-.editor__css {
-    width: 50%;
-    height: 100%;
-    background: var(--color-text);
+    justify-content: space-between;
+    padding: calc(var(--index) * 1);
 }
 
 .right-side {
-    width: 25vw;
+    width: 15vw;
     height: 100vh;
+    font-size: 1.3rem;
     background: var(--color-secondary);
 }

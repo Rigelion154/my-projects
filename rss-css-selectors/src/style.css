@@ -1,3 +1,4 @@
 @import './styles/base.css';
 
-@import "./styles/components/editor/editor-left.css";
+@import "./styles/components/editor.css";
+@import "./styles/components/table.css";

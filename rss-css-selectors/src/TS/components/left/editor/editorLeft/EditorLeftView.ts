@@ -2,6 +2,7 @@ import ComponentCreator from '../../../../utils/ComponentCreator';
 
 export default class EditorLeftView extends ComponentCreator {
     input: ComponentCreator;
+    button: ComponentCreator;
     constructor() {
         const options = {
             tagName: 'section',
@@ -13,6 +14,11 @@ export default class EditorLeftView extends ComponentCreator {
         this.input = new ComponentCreator({
             tagName: 'input',
             classNames: ['editor__input'],
+        });
+        this.button = new ComponentCreator({
+            tagName: 'button',
+            classNames: ['editor__button'],
+            textContent: 'Enter',
         });
         this.configureView();
     }
@@ -27,6 +33,9 @@ export default class EditorLeftView extends ComponentCreator {
             classNames: ['editor__left-main'],
             parentNode: this.getNode(),
         });
+        const mainField = new ComponentCreator({
+            classNames: ['editor__left-field'],
+        });
 
         const mainNumbers = new ComponentCreator({
             classNames: ['editor__left-numbers'],
@@ -35,6 +44,7 @@ export default class EditorLeftView extends ComponentCreator {
         for (let i = 1; i <= 15; i += 1) {
             mainNumbers.getNode().innerHTML += `<span>${i}</span>`;
         }
-        main.append(this.input);
+        mainField.appendChildren([this.input, this.button]);
+        main.append(mainField);
     }
 }

@@ -36,23 +36,3 @@ function getAllChildElements(element: Element): Element[] {
     }
     return childElements;
 }
-
-export function compareAnswer(array1: ChildNode[], array2: ChildNode[]) {
-    if (array1.length !== array2.length) {
-        console.log('Массивы имеют разную длину');
-        return false;
-    } else {
-        // Проверяем каждый объект ChildNode
-        for (let i = 0; i < array1.length; i++) {
-            const node1 = array1[i];
-            const node2 = array2[i];
-            if (!node1.isEqualNode(node2)) {
-                console.log('Массивы не равны');
-                return;
-            }
-        }
-
-        console.log('Массивы равны');
-        return true;
-    }
-}

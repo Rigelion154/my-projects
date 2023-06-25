@@ -27,12 +27,12 @@ class LeftView extends ComponentCreator {
 
     configureView() {
         this.appendChildren([this.table, this.editor]);
-        hoverHtmlMarkup(this.table.getNode(), this.editor.editorRight.mainTags.getNode());
-        hoverHtmlMarkup(this.editor.editorRight.mainTags.getNode(), this.table.getNode());
+        hoverHtmlMarkup(this.table.container.getNode(), this.editor.editorRight.mainTags.getNode());
+        hoverHtmlMarkup(this.editor.editorRight.mainTags.getNode(), this.table.container.getNode());
     }
     setTextContent(data: DataItem[], index: number) {
         this.title.addTextContent(data[index].doThis);
-        this.table.getNode().innerHTML = data[index].boardMarkup;
+        this.table.container.getNode().innerHTML = data[index].boardMarkup;
         this.editor.setTextContent(data, index);
     }
 }
