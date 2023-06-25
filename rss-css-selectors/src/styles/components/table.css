@@ -3,11 +3,11 @@
     height: calc(var(--index) * 15);
     display: flex;
     justify-content: flex-end;
-    padding: 10px;
     background-image: url("../../assets/truck.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    overflow: hidden;
 }
 
 .table__container {
@@ -15,9 +15,9 @@
     width: 55%;
     align-items: center;
     height: 50%;
-    column-gap: 10px;
+    column-gap: 5px;
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 30px 10px;
 }
 
 .table__container * {
@@ -94,11 +94,37 @@
     animation: scaleAnimation 1.3s infinite;
 }
 
+.done-left {
+    animation: move-left 1s;
+}
+
+.done-right {
+    animation: move-right 1s;
+}
+
 @keyframes scaleAnimation {
     0%, 100% {
         transform: scale(1);
     }
     50% {
         transform: scale(1.2);
+    }
+}
+
+@keyframes move-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(200%);
+    }
+}
+
+@keyframes move-right {
+    0% {
+        transform: translateX(200%);
+    }
+    100% {
+        transform: translateX(0);
     }
 }

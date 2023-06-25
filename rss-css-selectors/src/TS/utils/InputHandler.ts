@@ -17,17 +17,31 @@ export class InputHandler {
         const inputElement = this.input.input.getNode() as HTMLInputElement;
         const button = this.input.button.getNode() as HTMLButtonElement;
         const tagsElement = this.tags.mainTags.getNode() as HTMLElement;
-
+        const table = this.app.leftView.table.container.getNode();
         const handleEvent = (): boolean | void => {
             const firstList = tagsElement.querySelectorAll(inputElement.value);
             const secondList = tagsElement.querySelectorAll(data[this.app.index].selector);
             if (compareNodeLists(firstList, secondList)) {
-                const newIndex = this.app.index + 1;
-                this.app.updateIndex(newIndex);
-                inputElement.value = '';
+                table.classList.add('done-left');
+                table.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'move-left') {
+                        table.classList.remove('done-left');
+                        table.classList.add('done-right');
+                    }
+                    if (event.animationName === 'move-right') {
+                        table.classList.remove('done-left');
+                        table.classList.remove('done-right');
+                    }
+                });
+                setTimeout(() => {
+                    const newIndex = this.app.index + 1;
+                    this.app.updateIndex(newIndex);
+                    inputElement.value = '';
+                }, 1000);
             } else {
-                inputElement.value = '';
-                return false;
+                const editor = this.app.leftView.editor.getNode();
+                editor.classList.add('fail');
+                editor.addEventListener('animationend', () => editor.classList.remove('fail'));
             }
         };
 

@@ -17,7 +17,7 @@ export default class EditorLeftView extends ComponentCreator {
         });
         this.button = new ComponentCreator({
             tagName: 'button',
-            classNames: ['editor__button'],
+            classNames: ['editor__button', 'button'],
             textContent: 'Enter',
         });
         this.configureView();
@@ -44,6 +44,8 @@ export default class EditorLeftView extends ComponentCreator {
         for (let i = 1; i <= 15; i += 1) {
             mainNumbers.getNode().innerHTML += `<span>${i}</span>`;
         }
+        (this.input.getNode() as HTMLInputElement).type = 'text';
+        (this.input.getNode() as HTMLInputElement).placeholder = 'Type in a CSS selector';
         mainField.appendChildren([this.input, this.button]);
         main.append(mainField);
     }

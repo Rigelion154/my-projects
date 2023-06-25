@@ -39,9 +39,24 @@ body {
     padding: calc(var(--index) * 1);
 }
 
-.right-side {
-    width: 15vw;
-    height: 100vh;
-    font-size: 1.3rem;
-    background: var(--color-secondary);
+@media screen and (max-width: 800px){
+    .main__container {
+        justify-content: space-around;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(10px);
+    }
+    50% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(10px);
+    }
+}
+
+.fail {
+    animation: shake .2s;
 }

@@ -5,7 +5,7 @@ export const data: DataItem[] = [
         id: 0,
         doThis: 'Select the boxes',
         selector: `box`,
-        syntax: 'A',
+        syntax: 'Example A',
         helpTitle: 'Select elements by their type',
         selectorName: 'Type Selector',
         help:
@@ -21,7 +21,7 @@ export const data: DataItem[] = [
         id: 1,
         doThis: 'Select the ammo-boxes',
         selector: 'ammo-box',
-        syntax: 'A',
+        syntax: 'Example A',
         helpTitle: 'Select elements by their type',
         selectorName: 'Type Selector',
         help:
@@ -40,7 +40,7 @@ export const data: DataItem[] = [
         selector: `#magazines`,
         selectorName: 'ID Selector',
         helpTitle: 'Select elements with an ID',
-        syntax: '#id',
+        syntax: 'Example #id',
         help:
             'Selects the element with a specific <strong>id</strong>. ' +
             'You can also combine the ID selector with the type selector.',
@@ -57,7 +57,7 @@ export const data: DataItem[] = [
         doThis: 'Select the gun in a ammo-box',
         // selector: '<apple class="apple">< apple /></apple>',
         selector: 'ammo-box gun',
-        syntax: 'A&nbsp;&nbsp;B',
+        syntax: 'Example A&nbsp;&nbsp;B',
         help:
             'Selects all <strong>B</strong> inside of <strong>A</strong>. ' +
             '<strong>B</strong> is called a descendant because it is inside of another element.',
@@ -80,7 +80,7 @@ export const data: DataItem[] = [
         doThis: 'Pick the gun in the box of magazines',
         selector: '#magazines gun',
         helpTitle: 'Combine the Descendant & ID Selectors',
-        syntax: '#id&nbsp;&nbsp;A',
+        syntax: 'Example #id&nbsp;&nbsp;A',
         help: 'You can combine any selector with the descendent selector.',
         examples: [
             '<strong>#cool&nbsp;span</strong> selects all <tag>span</tag>  elements that are inside of elements with <strong>id="cool"</strong>',
@@ -107,7 +107,7 @@ export const data: DataItem[] = [
         selector: '.shotgun',
         selectorName: 'Class Selector',
         helpTitle: 'Select elements by their class',
-        syntax: '.classname',
+        syntax: 'Example .classname',
         help:
             'The class selector selects all elements with that class attribute. Elements can only have one ID, but many classes.',
         examples: ['<strong>.neato</strong> selects all elements with <strong>class="neato"</strong>'],
@@ -127,7 +127,7 @@ export const data: DataItem[] = [
         doThis: 'Select the shotgun ammo',
         selector: 'ammo.shotgun',
         helpTitle: 'Combine the Class Selector',
-        syntax: 'A.className',
+        syntax: 'Example A.className',
         help: 'You can combine the class selector with other selectors, like the type selector.',
         examples: [
             '<strong>ul.important</strong> selects all <tag>ul</tag> elements that have <strong>class="important"</strong>',
@@ -191,7 +191,7 @@ export const data: DataItem[] = [
         selector: 'box,ammo-box',
         selectorName: 'Comma Combinator',
         helpTitle: 'Combine, selectors, with... commas!',
-        syntax: 'A, B',
+        syntax: 'Example A, B',
         help:
             'Thanks to Shatner technology, this selects all <strong>A</strong> and <strong>B</strong> elements. You can combine any selectors this way, and you can specify more than two.',
         examples: [
@@ -226,7 +226,7 @@ export const data: DataItem[] = [
         selector: '*',
         selectorName: 'The Universal Selector',
         helpTitle: 'You can select everything!',
-        syntax: '*',
+        syntax: 'Example *',
         help: 'You can select all elements with the universal selector! ',
         examples: ['<strong>p *</strong> selects any element inside all <tag>p</tag> elements.'],
         boardMarkup: `
@@ -249,7 +249,7 @@ export const data: DataItem[] = [
         id: 10,
         doThis: 'Select everything on a plate',
         selector: 'plate *',
-        syntax: 'A&nbsp;&nbsp;*',
+        syntax: 'Example A&nbsp;&nbsp;*',
         helpTitle: 'Combine the Universal Selector',
         help: 'This selects all elements inside of <strong>A</strong>.',
         examples: [

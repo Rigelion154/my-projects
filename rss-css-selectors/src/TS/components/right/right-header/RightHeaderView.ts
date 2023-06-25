@@ -20,13 +20,13 @@ export default class RightHeaderView extends ComponentCreator {
         });
         this.prevButton = new ComponentCreator({
             tagName: 'button',
-            classNames: ['prev-button'],
+            classNames: ['prev-button', 'button'],
             textContent: `<`,
             parentNode: this.getNode(),
         });
         this.nextButton = new ComponentCreator({
             tagName: 'button',
-            classNames: ['next-button'],
+            classNames: ['next-button', 'button'],
             textContent: `>`,
             parentNode: this.getNode(),
         });

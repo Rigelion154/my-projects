@@ -1,0 +1,25 @@
+.right-side {
+    width: 15vw;
+    height: 100vh;
+    font-size: 1.2rem;
+    background: var(--color-secondary);
+}
+
+.right__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    row-gap: 5px;
+    padding: 5px;
+}
+
+.right__title {
+    width: 100%;
+}
+.right__main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
