@@ -62,5 +62,11 @@ class RightView extends ComponentCreator {
             if (index === i) (level as HTMLElement).dataset.complete = 'true';
         });
     }
+
+    checkLevelHelp(index: number) {
+        Array.from(this.levels.getNode().children).forEach((level, i) => {
+            if (index === i) (level as HTMLElement).dataset.complete = 'help';
+        });
+    }
 }
 export { RightView };

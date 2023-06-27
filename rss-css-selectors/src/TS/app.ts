@@ -5,18 +5,21 @@ import { data } from './data/data';
 import { ButtonHandler } from './utils/ButtonHandler';
 import { InputHandler } from './utils/InputHandler';
 import { LocalStorageManager } from './utils/LocalStorageManager';
+import { ResetButtonHandler } from './utils/ResetButtonHandler';
 
 class App {
     leftView: LeftView;
     rightView: RightView;
-    index: number;
     buttonHandler: ButtonHandler;
+    resetButtonHandler: ResetButtonHandler;
     inputHandler: InputHandler;
     localStorageManager: LocalStorageManager;
+    index: number;
     constructor() {
         this.index = 0;
         this.leftView = new LeftView(data, this.index);
         this.rightView = new RightView(data, this.index);
+        this.resetButtonHandler = new ResetButtonHandler(this);
         this.buttonHandler = new ButtonHandler(this, this.rightView.header);
         this.inputHandler = new InputHandler(this.leftView.editor.editorLeft, this.leftView.editor.editorRight, this);
         this.localStorageManager = new LocalStorageManager();
@@ -29,6 +32,7 @@ class App {
             classNames: ['container'],
             parentNode: document.body,
         });
+        this.rightView.resetButton.addCallBack(() => this.resetButtonHandler.handleReset());
         container.appendChildren([this.leftView, this.rightView]);
     }
     setTextContent(index: number) {

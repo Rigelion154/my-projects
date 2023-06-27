@@ -3,6 +3,7 @@ import ComponentCreator from '../../../../utils/ComponentCreator';
 export default class EditorLeftView extends ComponentCreator {
     input: ComponentCreator;
     button: ComponentCreator;
+    buttonHelp: ComponentCreator;
     constructor() {
         const options = {
             tagName: 'section',
@@ -17,8 +18,13 @@ export default class EditorLeftView extends ComponentCreator {
         });
         this.button = new ComponentCreator({
             tagName: 'button',
-            classNames: ['editor__button', 'button'],
+            classNames: ['editor__button', 'button', 'button__enter'],
             textContent: 'Enter',
+        });
+        this.buttonHelp = new ComponentCreator({
+            tagName: 'button',
+            classNames: ['editor__button', 'button'],
+            textContent: 'Help me!',
         });
         this.configureView();
     }
@@ -46,7 +52,7 @@ export default class EditorLeftView extends ComponentCreator {
         }
         (this.input.getNode() as HTMLInputElement).type = 'text';
         (this.input.getNode() as HTMLInputElement).placeholder = 'Type in a CSS selector';
-        mainField.appendChildren([this.input, this.button]);
+        mainField.appendChildren([this.input, this.button, this.buttonHelp]);
         main.append(mainField);
     }
 }

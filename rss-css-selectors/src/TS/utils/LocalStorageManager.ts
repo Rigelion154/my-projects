@@ -19,10 +19,7 @@ export class LocalStorageManager {
     }
 
     getProgress(array: Element[]) {
-        let levelStatus;
-        if (localStorage) {
-            levelStatus = JSON.parse(localStorage.getItem('levelStatus') as string);
-        }
+        const levelStatus = JSON.parse(localStorage.getItem('levelStatus') as string);
         if (levelStatus) {
             levelStatus.forEach((level: ILevel, i: number) => {
                 (array[i] as HTMLElement).dataset.complete = level.complete;

@@ -39,6 +39,7 @@
 .editor__left-field {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     column-gap: 10px;
@@ -46,10 +47,14 @@
 }
 
 .editor__input {
-    width: 90%;
+    width: 65%;
     padding: calc(var(--index) * .16);
     border-radius: 5px;
     font-size: 1.2rem;
+}
+
+.button__enter {
+    width: 25%;
 }
 
 .button {

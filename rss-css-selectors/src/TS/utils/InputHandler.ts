@@ -7,19 +7,32 @@ export class InputHandler {
     app: App;
     input: EditorLeftView;
     tags: EditorRightView;
+    isHelp: boolean;
     constructor(input: EditorLeftView, tags: EditorRightView, app: App) {
         this.input = input;
         this.tags = tags;
         this.app = app;
         this.setListeners();
+        this.isHelp = false;
     }
     setListeners() {
         const inputElement = this.input.input.getNode() as HTMLInputElement;
         const button = this.input.button.getNode() as HTMLButtonElement;
+        const helpButton = this.input.buttonHelp.getNode();
         const tagsElement = this.tags.mainTags.getNode() as HTMLElement;
         const table = this.app.leftView.table.container.getNode();
-        const reset = this.app.rightView.resetButton.getNode();
+        const editor = this.app.leftView.editor.getNode();
+
+        const handleWrongAnswer = () => {
+            if (!inputElement.value) {
+                editor.classList.add('fail');
+                editor.addEventListener('animationend', () => editor.classList.remove('fail'));
+                return false;
+            }
+        };
+
         const handleEvent = (): boolean | void => {
+            if (handleWrongAnswer() === false) return;
             const firstList = tagsElement.querySelectorAll(inputElement.value);
             const secondList = tagsElement.querySelectorAll(data[this.app.index].selector);
             if (compareNodeLists(firstList, secondList)) {
@@ -30,35 +43,46 @@ export class InputHandler {
                         table.classList.add('done-right');
                     }
                     if (event.animationName === 'move-right') {
-                        table.classList.remove('done-left');
+                        // table.classList.remove('done-left');
                         table.classList.remove('done-right');
                     }
                 });
-                this.app.rightView.checkLevel(this.app.index);
                 setTimeout(() => {
+                    if (this.isHelp) {
+                        this.app.rightView.checkLevelHelp(this.app.index);
+                    } else this.app.rightView.checkLevel(this.app.index);
+
+                    this.isHelp = false;
                     const newIndex = this.app.index + 1;
                     this.app.updateIndex(newIndex);
                     inputElement.value = '';
                 }, 1000);
             } else {
-                const editor = this.app.leftView.editor.getNode();
                 editor.classList.add('fail');
                 editor.addEventListener('animationend', () => editor.classList.remove('fail'));
             }
         };
+
+        helpButton.addEventListener('click', () => {
+            this.isHelp = true;
+            const answer = data[this.app.index].selector;
+            let currentIndex = 0;
+            const writeAnswer = setInterval(() => {
+                inputElement.value = answer.substring(0, currentIndex + 1);
+                currentIndex++;
+
+                if (currentIndex === answer.length) clearInterval(writeAnswer);
+            }, 125);
+        });
 
         const handleKeyUp = (event: KeyboardEvent): void => {
             if (event.code === 'Enter') {
                 handleEvent();
             }
         };
-
-        reset.addEventListener('click', () => {
-            this.app.updateIndex(0);
-            this.app.localStorageManager.removeProgress();
-            this.app.initialize();
+        button.addEventListener('click', () => {
+            handleEvent();
         });
-        button.addEventListener('click', handleEvent);
         inputElement.addEventListener('keyup', handleKeyUp);
     }
 }
