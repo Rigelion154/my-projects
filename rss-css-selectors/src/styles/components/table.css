@@ -29,41 +29,10 @@
     cursor: pointer;
 }
 
-/*.table__container box:before,*/
-/*.table__container gun:before,*/
-/*.table__container ammo-box:before{*/
-/*    content: attr(data-text);*/
-/*    position: absolute;*/
-/*    left: 0;*/
-/*    top: -30%;*/
-/*    width: 100px;*/
-/*    height: 20px;*/
-/*    background-color: white;*/
-/*    color: black;*/
-/*    font-size: 1rem;*/
-/*    opacity: 0;*/
-/*    visibility: hidden;*/
-/*}*/
-
-/*.table__container > * > *:before {*/
-/*    content: "Test Message";*/
-/*    position: absolute;*/
-/*    left: 0;*/
-/*    top: -30%;*/
-/*    width: 100%;*/
-/*    color: var(--color-text);*/
-/*    font-size: 1rem;*/
-/*    opacity: 0;*/
-/*    visibility: hidden;*/
-/*}*/
-
 .table__container *:hover:before {
     opacity: 1;
     visibility: visible;
 }
-
-/*.table__container *:after*/
-
 
 .table__container box {
     position: relative;

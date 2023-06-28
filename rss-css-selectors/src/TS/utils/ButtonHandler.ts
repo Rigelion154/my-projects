@@ -14,14 +14,12 @@ export class ButtonHandler {
         const nextButton = this.header.nextButton;
         nextButton.addCallBack(() => {
             let nextIndex = this.app.index + 1;
-            console.log(nextIndex);
             if (nextIndex === data.length) nextIndex = data.length - 1;
             this.app.updateIndex(nextIndex);
         });
         const prevButton = this.header.prevButton;
         prevButton.addCallBack(() => {
             let prevIndex = this.app.index - 1;
-            console.log(prevIndex);
             if (prevIndex < 1) prevIndex = 0;
             this.app.updateIndex(prevIndex);
         });

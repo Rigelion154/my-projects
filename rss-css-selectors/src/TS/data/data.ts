@@ -245,29 +245,19 @@ export const data: DataItem[] = [
     <ammo-box class="task" id="magazines">< ammo-box id="magazines" /></ammo-box>
     `,
     },
-    {
-        id: 11,
-        doThis: 'Select everything on a plate',
-        selector: 'plate *',
-        syntax: 'Example A&nbsp;&nbsp;*',
-        helpTitle: 'Combine the Universal Selector',
-        help: 'This selects all elements inside of <strong>A</strong>.',
-        examples: [
-            '<strong>p *</strong> selects every element inside all <tag>p</tag> elements.',
-            '<strong>ul.fancy *</strong> selects every element inside all <tag>ul class="fancy"</tag> elements.',
-        ],
-        boardMarkup: `
-    <plate id="fancy">
-      <orange class="small"/>
-    </plate>
-    <plate>
-      <pickle/>
-    </plate>
-    <apple class="small"/>
-    <plate>
-      <apple/>
-    </plate>`,
-    },
+    // {
+    //     id: 11,
+    //     doThis: 'Select everything on a plate',
+    //     selector: 'plate *',
+    //     syntax: 'Example A&nbsp;&nbsp;*',
+    //     helpTitle: 'Combine the Universal Selector',
+    //     help: 'This selects all elements inside of <strong>A</strong>.',
+    //     examples: [
+    //         '<strong>p *</strong> selects every element inside all <tag>p</tag> elements.',
+    //         '<strong>ul.fancy *</strong> selects every element inside all <tag>ul class="fancy"</tag> elements.',
+    //     ],
+    //     boardMarkup: `<div> You Win</div>`,
+    // },
 ];
 
 export const db = [{ selector: 'plato' }, { selector: 'plato', child: [{ selector: 'benito' }] }];

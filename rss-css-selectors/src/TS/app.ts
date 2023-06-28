@@ -6,6 +6,7 @@ import { ButtonHandler } from './utils/ButtonHandler';
 import { InputHandler } from './utils/InputHandler';
 import { LocalStorageManager } from './utils/LocalStorageManager';
 import { ResetButtonHandler } from './utils/ResetButtonHandler';
+import { Modal } from './components/Modal';
 
 class App {
     leftView: LeftView;
@@ -14,17 +15,18 @@ class App {
     resetButtonHandler: ResetButtonHandler;
     inputHandler: InputHandler;
     localStorageManager: LocalStorageManager;
+    modal: Modal;
     index: number;
     constructor() {
         this.index = 0;
         this.leftView = new LeftView(data, this.index);
         this.rightView = new RightView(data, this.index);
         this.resetButtonHandler = new ResetButtonHandler(this);
+        this.modal = new Modal(this.resetButtonHandler);
         this.buttonHandler = new ButtonHandler(this, this.rightView.header);
         this.inputHandler = new InputHandler(this.leftView.editor.editorLeft, this.leftView.editor.editorRight, this);
         this.localStorageManager = new LocalStorageManager();
         this.initialize();
-        console.log(this.index);
     }
 
     createView() {
@@ -33,7 +35,7 @@ class App {
             parentNode: document.body,
         });
         this.rightView.resetButton.addCallBack(() => this.resetButtonHandler.handleReset());
-        container.appendChildren([this.leftView, this.rightView]);
+        container.appendChildren([this.leftView, this.rightView, this.modal]);
     }
     setTextContent(index: number) {
         this.leftView.setTextContent(data, index);

@@ -35,7 +35,7 @@ export default class ComponentCreator {
         this.node.textContent = text;
     }
 
-    addCallBack(callback: () => void): void {
+    addCallBack(callback: (e: Event) => void): void {
         this.node.addEventListener('click', callback);
     }
 

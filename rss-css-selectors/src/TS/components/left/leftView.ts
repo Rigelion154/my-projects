@@ -33,20 +33,6 @@ class LeftView extends ComponentCreator {
     setTextContent(data: DataItem[], index: number) {
         this.title.addTextContent(data[index].doThis);
         this.table.container.getNode().innerHTML = data[index].boardMarkup;
-        // Array.from(this.table.container.getNode().children).forEach((el) => {
-        //     (el as HTMLElement).dataset.text = `${el.textContent}`;
-        // });
-        // function setDatasetText(element: HTMLElement): void {
-        //     element.dataset.text = String(element.textContent);
-        //     const children = Array.from(element.children) as HTMLElement[];
-        //     children.forEach((child) => {
-        //         setDatasetText(child);
-        //     });
-        // }
-        //
-        // const container = this.table.container.getNode() as HTMLElement;
-        // setDatasetText(container);
-
         this.editor.setTextContent(data, index);
     }
 }

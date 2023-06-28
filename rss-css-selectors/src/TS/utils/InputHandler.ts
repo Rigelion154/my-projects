@@ -51,9 +51,13 @@ export class InputHandler {
                     if (this.isHelp) {
                         this.app.rightView.checkLevelHelp(this.app.index);
                     } else this.app.rightView.checkLevel(this.app.index);
-
                     this.isHelp = false;
-                    const newIndex = this.app.index + 1;
+
+                    let newIndex = this.app.index + 1;
+                    if (newIndex >= data.length) {
+                        newIndex = data.length - 1;
+                        this.app.modal.getNode().classList.add('open');
+                    }
                     this.app.updateIndex(newIndex);
                     inputElement.value = '';
                 }, 1000);

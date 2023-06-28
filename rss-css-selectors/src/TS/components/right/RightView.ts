@@ -2,10 +2,12 @@ import ComponentCreator from '../../utils/ComponentCreator';
 import RightHeaderView from './right-header/RightHeaderView';
 import { DataItem } from '../../types';
 import RightMainView from './right-main/RightMainView';
+import { RightFooterView } from './right-footer/RightFooterView';
 
 class RightView extends ComponentCreator {
     header: RightHeaderView;
     main: RightMainView;
+    footer: RightFooterView;
     levels: ComponentCreator;
     resetButton: ComponentCreator;
     constructor(data: DataItem[], index: number) {
@@ -25,6 +27,7 @@ class RightView extends ComponentCreator {
             textContent: 'Reset Progress',
             classNames: ['button', 'right__reset'],
         });
+        this.footer = new RightFooterView();
         this.configureView(data);
         this.setTextContent(data, index);
     }
@@ -46,7 +49,7 @@ class RightView extends ComponentCreator {
             level.getNode().insertAdjacentElement('afterbegin', isComplete.getNode());
             this.levels.appendChildren([level]);
         });
-        this.appendChildren([this.header, this.main, this.levels, this.resetButton]);
+        this.appendChildren([this.header, this.main, this.levels, this.resetButton, this.footer]);
     }
 
     setTextContent(data: DataItem[], index: number) {
