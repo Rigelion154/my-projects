@@ -1,0 +1,38 @@
+@import "variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc($index-size * .35);
+}
+
+body {
+  font-size: 2rem;
+}
+
+.container {
+  max-width: 1440px;
+  padding: $section-padding;
+  margin: auto;
+}
+
+.button {
+  font-size: 2rem;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 2px solid $color-primary;
+  border-radius: 8px;
+  background-color: transparent;
+  &:hover {
+    background-color: $color-primary;
+    color: $color-secondary;
+    transition: background-color .7s, color .5s;
+  }
+}
+
+
+

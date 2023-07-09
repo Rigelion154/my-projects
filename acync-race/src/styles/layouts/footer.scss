@@ -1,0 +1,33 @@
+@import "../variables";
+
+.footer {
+  background-color: $color-primary;
+}
+
+.footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.footer__image {
+  width: calc($index-size * 5);
+  height: calc($index-size * 2);
+}
+
+.footer__image-git {
+  background: url("./assets/git.png") no-repeat;
+  background-size: contain;
+}
+
+.footer__image-rs {
+  background: url("./assets/rs.png") no-repeat;
+  background-size: contain;
+}
