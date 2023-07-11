@@ -1,5 +1,4 @@
 import ComponentCreator from '../../utils/component-creator';
-import GarageView from './garage/garage-view';
 
 const cssClasses = {
   MAIN: 'main',
@@ -7,17 +6,14 @@ const cssClasses = {
 };
 
 export default class MainView extends ComponentCreator {
-  static container: ComponentCreator;
+  container: ComponentCreator;
   constructor() {
     super(cssClasses.MAIN, 'main');
-    MainView.container = new ComponentCreator(cssClasses.CONTAINER);
-    this.createView();
+    this.container = new ComponentCreator(cssClasses.CONTAINER);
+    this.element.append(this.container.getElement());
   }
 
-  createView() {
-    const garage = new GarageView();
-
-    MainView.container.addInnerElement(garage.getElement());
-    this.element.append(MainView.container.getElement());
+  createView(content: HTMLElement) {
+    this.container.addInnerElement(content);
   }
 }

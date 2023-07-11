@@ -12,6 +12,14 @@ html {
 
 body {
   font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+.main {
+  flex: 1 0 0;
 }
 
 .container {
@@ -21,13 +29,14 @@ body {
 }
 
 .button {
+  width: calc($index-size * 4.5);
   font-size: 2rem;
   padding: 5px 10px;
   cursor: pointer;
   border: 2px solid $color-primary;
   border-radius: 8px;
   background-color: transparent;
-  &:hover {
+  &:not(button[disabled]):hover {
     background-color: $color-primary;
     color: $color-secondary;
     transition: background-color .7s, color .5s;

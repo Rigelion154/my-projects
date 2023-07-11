@@ -23,6 +23,4 @@ export default class ComponentCreator {
       this.element.addEventListener('click', (event) => callback(event));
     }
   }
-
-  createView() {}
 }
