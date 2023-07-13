@@ -12,8 +12,4 @@ export default class MainView extends ComponentCreator {
     this.container = new ComponentCreator(cssClasses.CONTAINER);
     this.element.append(this.container.getElement());
   }
-
-  createView(content: HTMLElement) {
-    this.container.addInnerElement(content);
-  }
 }

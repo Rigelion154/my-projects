@@ -20,7 +20,11 @@ body {
 
 .main {
   flex: 1 0 0;
+  &__container{
+    height: 90vh;
+  }
 }
+
 
 .container {
   max-width: 1440px;
@@ -29,9 +33,9 @@ body {
 }
 
 .button {
-  width: calc($index-size * 4.5);
+  width: calc($index-size * 4);
   font-size: 2rem;
-  padding: 5px 10px;
+  padding: 2px 6px;
   cursor: pointer;
   border: 2px solid $color-primary;
   border-radius: 8px;
@@ -43,5 +47,18 @@ body {
   }
 }
 
+.race {
+  animation-name: race;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+}
 
+@keyframes race {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: calc(100% - 150px);
+}
+}
 

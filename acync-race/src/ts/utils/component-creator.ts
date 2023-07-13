@@ -1,7 +1,7 @@
 export default class ComponentCreator {
   protected element: HTMLElement;
 
-  protected constructor(className: string, tagName: string = 'div') {
+  constructor(className: string, tagName: string = 'div') {
     this.element = document.createElement(tagName);
     this.element.className = className;
   }

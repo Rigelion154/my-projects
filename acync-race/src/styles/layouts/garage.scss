@@ -1,8 +1,12 @@
-.car {
-  width: 120px;
+@import "../variables";
+.garage__container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
 }
 
-.garage__editor {
+.garage__toolbar {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -12,14 +16,22 @@
   display: flex;
   align-items: center;
   column-gap: 10px;
+
   & input[type="text"] {
     border: 1px solid;
     border-radius: 5px;
     padding: 5px 10px;
   }
+
   & input[type="color"] {
     border: none;
   }
+}
+
+.garage__buttons {
+  display: flex;
+  column-gap: 10px;
+  margin-top: auto;
 }
 
 .cars {
@@ -28,7 +40,44 @@
   row-gap: 10px;
 }
 
+.car {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  border-bottom: 1px solid black;
+}
+
+.car__view {
+  width: 100%;
+}
+.car__title{
+  text-align: left;
+}
+
+.car__image {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  top: 0;
+}
+
 .car__buttons {
   display: flex;
-  column-gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 5px;
+  border: 1px solid $color-primary;
+  padding: 1px;
+}
+
+.button__car {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: $color-primary;
+  padding: 0 5px;
+  &:hover {
+    background: $color-primary;
+    color: $color-secondary;
+  }
 }

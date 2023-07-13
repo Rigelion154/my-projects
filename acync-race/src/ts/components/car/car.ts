@@ -1,4 +1,9 @@
 import getCarImage from '../../utils/get-car-image';
+import ComponentCreator from '../../utils/component-creator';
+import ButtonComponentCreator from '../../utils/button-component-creator';
+import Storage from '../../utils/storage';
+import EditTool from '../main/garage/edit-tool';
+import GarageView from '../main/garage/garage-view';
 
 type CarResponse = {
   name: string;
@@ -12,76 +17,114 @@ export default class Car {
     garage: '/garage',
     winners: '/winners',
   };
-  deleteButton: HTMLButtonElement;
-  constructor() {
-    this.deleteButton = document.createElement('button');
+  carElement: HTMLElement;
+  deleteButton: ButtonComponentCreator;
+  selectButton: ButtonComponentCreator;
+  startButton: ButtonComponentCreator;
+  stopButton: ButtonComponentCreator;
+  id: number;
+  editTool: EditTool;
+  garage: GarageView;
+  constructor(editTool: EditTool, garage: GarageView) {
+    this.editTool = editTool;
+    this.garage = garage;
+    this.id = 0;
+    this.deleteButton = new ButtonComponentCreator('button__car car__delete', 'Delete');
+    this.deleteButton.setCallback(this.deleteCar.bind(this));
+    this.selectButton = new ButtonComponentCreator('button__car car__select', 'Select');
+    this.selectButton.setCallback(this.getEditCar.bind(this));
+    this.startButton = new ButtonComponentCreator('button__car car__start', 'Start');
+    this.stopButton = new ButtonComponentCreator('button__car car__stop', 'Stop');
+    this.carElement = new ComponentCreator('car').getElement();
   }
 
-  async getCars(container: HTMLElement) {
-    const garage = await fetch(`${Car.url}${Car.path.garage}`);
-    const cars: CarResponse[] = await garage.json();
-    cars.forEach((car) => {
-      container.append(this.getCarContainer(car.id, car.name, car.color));
-    });
-    // return cars;
+  async getEditCar() {
+    const garage = await fetch(`${Car.url}${Car.path.garage}/${this.id}`);
+    const car: CarResponse = await garage.json();
+    this.editTool.editTextInput.getElement().value = car.name;
+    this.editTool.editTextInput.getElement().disabled = false;
+    this.editTool.editColorInput.value = car.color;
+    this.editTool.editHandler();
+    Storage.editCarId = car.id;
   }
 
-  // static getCar = async (id: number) => {
-  //   const garage = await fetch(`${Car.url}${Car.path.garage}/${id}`);
-  //   const car: CarResponse = await garage.json();
-  //   return car;
-  // };
-
-  static createCar = async (brand: string, color: string) => {
+  async createCar(name: string, color: string) {
     const garage = await fetch(`${Car.url}${Car.path.garage}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: brand,
+        name,
         color,
       }),
     });
-
     const car: CarResponse = await garage.json();
+    await this.renderCars();
     return car;
-  };
+  }
 
-  async deleteCar(id: number) {
-    const garage = await fetch(`${Car.url}${Car.path.garage}/${id}`, { method: 'DELETE' });
+  async editCar(name: string, color: string, id: number) {
+    const garage = await fetch(`${Car.url}${Car.path.garage}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        color,
+      }),
+    });
     const car: CarResponse = await garage.json();
+    await this.renderCars();
+    return car;
+  }
+
+  async deleteCar() {
+    const garage = await fetch(`${Car.url}${Car.path.garage}/${this.id}`, { method: 'DELETE' });
+    const car: CarResponse = await garage.json();
+    await this.renderCars();
+    await this.garage.setButtonsStatus();
     return car;
   }
 
   getCarContainer(id: number, name: string, color: string): HTMLElement {
-    const container = document.createElement('div');
-    container.className = 'car';
-    container.dataset.id = id.toString();
-    const selectButton = document.createElement('button');
-    selectButton.className = 'button car__select';
-    selectButton.textContent = 'Select';
-    const deleteButton = document.createElement('button');
-    deleteButton.className = 'button car__delete';
-    deleteButton.textContent = 'Delete';
-    deleteButton.dataset.id = id.toString();
-    const buttons = document.createElement('div');
-    buttons.className = 'car__buttons';
-    buttons.append(selectButton, deleteButton);
-    const carTitle = document.createElement('h3');
-    carTitle.className = 'car__title';
-    carTitle.textContent = name;
+    this.id = id;
+    const buttons = new ComponentCreator('car__buttons').getElement();
+    buttons.append(
+      this.selectButton.getElement(),
+      this.deleteButton.getElement(),
+      this.startButton.getElement(),
+      this.stopButton.getElement()
+    );
+
     const carImage = document.createElement('div');
     carImage.className = 'car__image';
     carImage.innerHTML = getCarImage(color);
-    container.append(carTitle, carImage, buttons);
 
-    return container;
+    const carTitle = new ComponentCreator('car__title', 'h3').getElement();
+    carTitle.textContent = name;
+
+    const carView = new ComponentCreator('car__view').getElement();
+    carView.append(carTitle, carImage);
+
+    this.carElement.append(buttons, carView);
+    return this.carElement;
   }
 
-  async renderCar(brand: string, color: string, element: HTMLElement) {
-    const car = await Car.createCar(brand, color);
-    const container = await this.getCarContainer(car.id, car.name, car.color);
-    element.append(container);
+  async renderCars() {
+    this.garage.carContainer.innerHTML = '';
+    const garage = await fetch(
+      `${Car.url}${Car.path.garage}?_page=${Storage.currentPage}&_limit=${Storage.maxPageItem}`
+    );
+    const cars: CarResponse[] = await garage.json();
+
+    const totalCars = garage.headers.get('X-Total-Count');
+    this.garage.title.textContent = `Garage (${totalCars})`;
+    this.garage.pagesCount.textContent = `Page #${Storage.currentPage}`;
+    cars.forEach((car) => {
+      const carEl = new Car(this.editTool, this.garage).getCarContainer(car.id, car.name, car.color);
+      this.garage.carContainer.append(carEl);
+    });
   }
 }
