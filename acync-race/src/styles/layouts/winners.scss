@@ -1,0 +1,33 @@
+.winners__container {
+  display: none;
+  height: 100%;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.winners__cars {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.winners__item {
+  display: flex;
+  align-items: center;
+  & > * {
+    width: 20%;
+    text-align: center;
+  }
+}
+
+.winner__image {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  top: 0;
+}
+
+//.winners__item {
+//  list-style: ;
+//}

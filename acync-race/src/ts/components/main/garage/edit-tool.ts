@@ -37,4 +37,11 @@ export default class EditTool extends ComponentCreator {
     container.append(this.editTextInput.getElement(), this.editColorInput, this.editButton);
     return container;
   }
+
+  editSelectHandler(name: string, color: string) {
+    this.editTextInput.getElement().value = name;
+    this.editTextInput.getElement().disabled = false;
+    this.editColorInput.value = color;
+    this.editHandler();
+  }
 }

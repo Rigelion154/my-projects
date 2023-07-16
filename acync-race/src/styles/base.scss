@@ -57,7 +57,7 @@ body {
     left: 0;
   }
   100% {
-    left: calc(100% - 150px);
+    left: calc(100% - calc($index-size * 6));
 }
 }
 @keyframes solo {
@@ -65,7 +65,7 @@ body {
     left: 0;
   }
   100% {
-    left: calc(100% - 150px);
+    left: calc(80%);
   }
 }
 

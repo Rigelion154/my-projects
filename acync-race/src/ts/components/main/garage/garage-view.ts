@@ -50,7 +50,7 @@ export default class GarageView extends ComponentCreator {
   }
 
   async setButtonsStatus() {
-    this.nextButton.disabled = Storage.currentPage === (await Storage.getMaxPages());
-    this.prevButton.disabled = Storage.currentPage === 1;
+    this.nextButton.disabled = Storage.currentGaragePage === (await Storage.getGarageMaxPages());
+    this.prevButton.disabled = Storage.currentGaragePage === 1;
   }
 }

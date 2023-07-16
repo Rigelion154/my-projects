@@ -8,11 +8,14 @@ import CreateTool from './main/garage/create-tool';
 import EditTool from './main/garage/edit-tool';
 import Pagination from '../utils/pagination';
 import Modal from './main/winners/winner-modal';
+import WinnersView from './main/winners/winners-view';
+import { createCar, editCar } from '../utils/api';
 
 export default class App {
   header: HeaderView;
   main: MainView;
   garage: GarageView;
+  winners: WinnersView;
   createTool: CreateTool;
   editTool: EditTool;
   car: Car;
@@ -23,6 +26,7 @@ export default class App {
     this.header = new HeaderView();
     this.main = new MainView();
     this.garage = new GarageView();
+    this.winners = new WinnersView();
     this.createTool = new CreateTool();
     this.createTool.createButton.setCallback(this.createButtonHandler.bind(this));
     this.editTool = new EditTool();
@@ -34,7 +38,20 @@ export default class App {
     this.paginationHandler();
     this.raceStartHandler();
     this.raceResetHandler();
+    this.headerHandler();
     this.car.renderCars();
+  }
+
+  headerHandler() {
+    this.header.garageButton.setCallback(() => {
+      this.garage.getElement().style.display = 'flex';
+      this.winners.getElement().style.display = 'none';
+    });
+    this.header.winnersButton.setCallback(async () => {
+      this.garage.getElement().style.display = 'none';
+      this.winners.getElement().style.display = 'flex';
+      await this.winners.renderWinners();
+    });
   }
 
   renderGarage() {
@@ -45,7 +62,7 @@ export default class App {
 
   async createView() {
     this.renderGarage();
-    this.main.container.getElement().append(this.garage.getElement());
+    this.main.container.getElement().append(this.garage.getElement(), this.winners.getElement());
     const footer = new FooterView();
     document.body.append(
       this.header.getElement(),
@@ -65,21 +82,20 @@ export default class App {
   }
 
   async createButtonHandler() {
-    await this.car.createCar(
-      this.createTool.createTextInput.getElement().value,
-      this.createTool.createColorInput.value
-    );
+    await createCar(this.createTool.createTextInput.getElement().value, this.createTool.createColorInput.value);
     await this.garage.setButtonsStatus();
+    await this.car.renderCars();
     this.createTool.createTextInput.getElement().value = '';
     this.createTool.inputHandler();
   }
 
   async editButtonHandler() {
-    await this.car.editCar(
+    await editCar(
       this.editTool.editTextInput.getElement().value,
       this.editTool.editColorInput.value,
       Storage.editCarId
     );
+    await this.car.renderCars();
     await this.garage.setButtonsStatus();
     this.editTool.editTextInput.getElement().value = '';
     this.editTool.editTextInput.getElement().disabled = true;
@@ -91,13 +107,28 @@ export default class App {
       await this.car.renderCars();
       const speeds = await Promise.all(this.car.cars.map((car) => car.startEngine()));
       await this.car.startRace(speeds);
-      this.car.cars.forEach((car) => car.getWinners(this.modal));
+      this.car.cars.forEach((car) => car.setWinners(this.modal));
+      this.header.garageButton.getElement().disabled = true;
+      this.header.winnersButton.getElement().disabled = true;
+      this.createTool.createButton.getElement().disabled = true;
+      this.editTool.editButton.disabled = true;
+      this.car.cars.forEach((car) => {
+        car.disableCarButtons();
+      });
     });
   }
 
   raceResetHandler() {
     this.garage.resetButton.addEventListener('click', () => {
-      this.car.cars.forEach((car) => car.stopEngine());
+      this.header.garageButton.getElement().disabled = false;
+      this.header.winnersButton.getElement().disabled = false;
+      this.createTool.createButton.getElement().disabled = false;
+      this.editTool.editButton.disabled = false;
+      this.car.cars.forEach(async (car) => {
+        car.enableCarButtons();
+        await car.stopEngine();
+      });
+      Storage.isAnimationEnd = false;
       Storage.winner = [];
     });
   }

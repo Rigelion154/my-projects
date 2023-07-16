@@ -1,11 +1,13 @@
 import ComponentCreator from '../../utils/component-creator';
-import HeaderButtons from './header-buttons';
+import ButtonComponentCreator from '../../utils/button-component-creator';
 
 const cssClasses = {
   HEADER: 'header',
   NAV: 'nav',
   LOGO: 'logo',
   CONTAINER: 'container header__container',
+  GARAGE_BTN: 'button nav__button',
+  WINNERS_BTN: 'button nav__button',
 };
 
 const textContent = {
@@ -15,8 +17,12 @@ const textContent = {
 };
 
 export default class HeaderView extends ComponentCreator {
+  garageButton: ButtonComponentCreator;
+  winnersButton: ButtonComponentCreator;
   constructor() {
     super(cssClasses.HEADER);
+    this.garageButton = new ButtonComponentCreator(cssClasses.GARAGE_BTN, textContent.GARAGE_BTN);
+    this.winnersButton = new ButtonComponentCreator(cssClasses.WINNERS_BTN, textContent.WINNERS_BTN);
     this.createView();
   }
 
@@ -25,29 +31,9 @@ export default class HeaderView extends ComponentCreator {
     const logo = new ComponentCreator(cssClasses.LOGO, 'h1');
     logo.setTextContent(textContent.LOGO);
 
-    const nav = new ComponentCreator(cssClasses.NAV);
-
-    const pages = [
-      {
-        name: textContent.GARAGE_BTN,
-        // eslint-disable-next-line no-console
-        callback: () => console.log('+'),
-      },
-      {
-        name: textContent.WINNERS_BTN,
-        // eslint-disable-next-line no-console
-        callback: () => console.log('-'),
-      },
-    ];
-
-    pages.forEach((el) => {
-      const headerButton = new HeaderButtons();
-      headerButton.setTextContent(el.name);
-      headerButton.setCallback(el.callback);
-      nav.addInnerElement(headerButton.getElement());
-    });
-
-    container.getElement().append(nav.getElement(), logo.getElement());
+    const nav = new ComponentCreator(cssClasses.NAV).getElement();
+    nav.append(this.garageButton.getElement(), this.winnersButton.getElement());
+    container.getElement().append(nav, logo.getElement());
     this.element.append(container.getElement());
   }
 }
