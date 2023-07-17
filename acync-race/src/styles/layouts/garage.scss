@@ -30,8 +30,19 @@
 
 .garage__buttons {
   display: flex;
-  column-gap: 10px;
+  justify-content: space-between;
   margin-top: auto;
+}
+
+.garage__buttons-pagination,
+.garage__buttons-control {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.garage__button-generate {
+  width: calc($index-size * 6);
 }
 
 .cars {
@@ -48,6 +59,7 @@
 }
 
 .car__view {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -91,4 +103,16 @@
   &[disabled] {
     color: red;
   }
+}
+
+.car__flag {
+  max-width: 40px;
+  max-height: 30px;
+  width: calc($index-size * 4);
+  height: calc($index-size * 2);
+  position: absolute;
+  left: calc(100% - calc($index-size * 8));
+  bottom: 0;
+  background: url("./assets/flag.png") no-repeat;
+  background-size: contain;
 }

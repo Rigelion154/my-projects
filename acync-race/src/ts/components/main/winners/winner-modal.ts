@@ -10,12 +10,15 @@ export default class Modal extends ComponentCreator {
   constructor() {
     super(cssClasses.MODAL);
     this.modalContent = new ComponentCreator(cssClasses.MODAL_CONTENT).getElement();
-    this.element.append(this.modalContent);
+    const container = new ComponentCreator('modal__container').getElement();
+    const image = new ComponentCreator('modal__image').getElement();
+    container.append(image, this.modalContent);
     this.setCallback(this.closeModal.bind(this));
+    this.element.append(container);
   }
 
   setContent(name: string, time: number) {
-    this.modalContent.textContent = `${name} win with time ${time} second!`;
+    this.modalContent.innerHTML = `<strong>${name}</strong> win with time <strong>${time}</strong> second!`;
   }
 
   openModal() {

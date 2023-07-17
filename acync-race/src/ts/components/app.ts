@@ -10,6 +10,7 @@ import Pagination from '../utils/pagination';
 import Modal from './main/winners/winner-modal';
 import WinnersView from './main/winners/winners-view';
 import { createCar, editCar } from '../utils/api';
+import getHundredCars from '../utils/getHundredCars';
 
 export default class App {
   header: HeaderView;
@@ -39,6 +40,7 @@ export default class App {
     this.raceStartHandler();
     this.raceResetHandler();
     this.headerHandler();
+    this.generateButtonHandler();
     this.car.renderCars();
   }
 
@@ -50,6 +52,7 @@ export default class App {
     this.header.winnersButton.setCallback(async () => {
       this.garage.getElement().style.display = 'none';
       this.winners.getElement().style.display = 'flex';
+      await this.winners.setButtonsStatus();
       await this.winners.renderWinners();
     });
   }
@@ -79,6 +82,12 @@ export default class App {
     this.garage.prevButton.addEventListener('click', async () => {
       await this.pagination.prevButtonHandler(this.car, this.garage);
     });
+    this.winners.nextButton.addEventListener('click', async () => {
+      await this.pagination.nextWinnersButtonHandler(this.car, this.winners);
+    });
+    this.winners.prevButton.addEventListener('click', async () => {
+      await this.pagination.prevWinnersButtonHandler(this.car, this.winners);
+    });
   }
 
   async createButtonHandler() {
@@ -90,11 +99,9 @@ export default class App {
   }
 
   async editButtonHandler() {
-    await editCar(
-      this.editTool.editTextInput.getElement().value,
-      this.editTool.editColorInput.value,
-      Storage.editCarId
-    );
+    const editInput = this.editTool.editTextInput.getElement();
+    const editContent = editInput.value === '' ? (editInput.value = 'Default Car') : editInput.value;
+    await editCar(editContent, this.editTool.editColorInput.value, Storage.editCarId);
     await this.car.renderCars();
     await this.garage.setButtonsStatus();
     this.editTool.editTextInput.getElement().value = '';
@@ -108,28 +115,56 @@ export default class App {
       const speeds = await Promise.all(this.car.cars.map((car) => car.startEngine()));
       await this.car.startRace(speeds);
       this.car.cars.forEach((car) => car.setWinners(this.modal));
-      this.header.garageButton.getElement().disabled = true;
-      this.header.winnersButton.getElement().disabled = true;
-      this.createTool.createButton.getElement().disabled = true;
-      this.editTool.editButton.disabled = true;
+      this.raceButtonsDisable();
       this.car.cars.forEach((car) => {
-        car.disableCarButtons();
+        car.raceButtonsDisable();
       });
     });
   }
 
   raceResetHandler() {
-    this.garage.resetButton.addEventListener('click', () => {
-      this.header.garageButton.getElement().disabled = false;
-      this.header.winnersButton.getElement().disabled = false;
-      this.createTool.createButton.getElement().disabled = false;
-      this.editTool.editButton.disabled = false;
-      this.car.cars.forEach(async (car) => {
-        car.enableCarButtons();
-        await car.stopEngine();
-      });
+    this.garage.resetButton.addEventListener('click', async () => {
+      await Promise.all(
+        this.car.cars.map(async (car) => {
+          Storage.isAnimationEnd = true;
+          await car.stopEngine();
+          car.raceButtonsEnable();
+        })
+      );
+      this.raceButtonsEnable();
       Storage.isAnimationEnd = false;
-      Storage.winner = [];
     });
+  }
+
+  generateButtonHandler() {
+    this.garage.generateButton.setCallback(async () => {
+      await getHundredCars();
+      await this.car.renderCars();
+      await this.garage.setButtonsStatus();
+    });
+  }
+
+  raceButtonsDisable() {
+    this.header.garageButton.getElement().disabled = true;
+    this.header.winnersButton.getElement().disabled = true;
+    this.createTool.createButton.getElement().disabled = true;
+    this.createTool.createTextInput.getElement().disabled = true;
+    this.garage.generateButton.getElement().disabled = true;
+    this.editTool.editButton.disabled = true;
+    this.garage.raceButton.disabled = true;
+    this.garage.nextButton.disabled = true;
+    this.garage.prevButton.disabled = true;
+  }
+
+  raceButtonsEnable() {
+    this.header.garageButton.getElement().disabled = false;
+    this.header.winnersButton.getElement().disabled = false;
+    this.createTool.createButton.getElement().disabled = false;
+    this.createTool.createTextInput.getElement().disabled = false;
+    this.garage.generateButton.getElement().disabled = false;
+    this.editTool.editButton.disabled = false;
+    this.garage.raceButton.disabled = false;
+    this.garage.nextButton.disabled = false;
+    this.garage.prevButton.disabled = false;
   }
 }

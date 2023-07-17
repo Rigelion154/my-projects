@@ -2,12 +2,13 @@ import ComponentCreator from '../../../utils/component-creator';
 import ButtonComponentCreator from '../../../utils/button-component-creator';
 import Storage from '../../../utils/storage';
 import getCarImage from '../../../utils/get-car-image';
+import { getCarById, getWinners } from '../../../utils/api';
 
-type WinResponse = {
-  id: number;
-  wins: number;
-  time: number;
-};
+// type WinResponse = {
+//   id: number;
+//   wins: number;
+//   time: number;
+// };
 
 type CarResponse = {
   name: string;
@@ -48,7 +49,6 @@ export default class WinnersView extends ComponentCreator {
     this.carContainer.setAttribute('start', '1');
     this.prevButton = new ButtonComponentCreator(cssClasses.BTN_PREV, textContent.BTN_PREV).getElement();
     this.nextButton = new ButtonComponentCreator(cssClasses.BTN_NEXT, textContent.BTN_NEXT).getElement();
-
     this.setButtonsStatus().then(() => this.setCreateTools());
     this.renderWinners();
   }
@@ -73,16 +73,12 @@ export default class WinnersView extends ComponentCreator {
   }
 
   async renderWinners() {
-    const winners = await fetch(
-      `${this.url}${this.path.winners}?_page=${Storage.currentWinnersPage}&_limit=${Storage.maxWinnersPageItem}`
-    );
-    const winnerCars: WinResponse[] = await winners.json();
-    const totalCars = winners.headers.get('X-Total-Count');
-    this.title.textContent = `Winners (${totalCars})`;
+    const { winners, totalWinners } = await getWinners();
+    this.title.textContent = `Winners (${totalWinners})`;
     this.pagesCount.textContent = `Page #${Storage.currentWinnersPage}`;
     this.carContainer.innerHTML = '';
-    winnerCars.forEach(async (car, index) => {
-      const garageCar = await this.getCarById(car.id);
+    winners.forEach(async (car, index) => {
+      const garageCar = await getCarById(car.id);
       const winnersList = new ComponentCreator('winner__list').getElement();
       const winnerImage = new ComponentCreator('winner__image').getElement();
       const winnerName = new ComponentCreator('winner__name').getElement();

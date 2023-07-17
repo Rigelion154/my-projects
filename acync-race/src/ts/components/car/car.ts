@@ -5,7 +5,19 @@ import Storage from '../../utils/storage';
 import EditTool from '../main/garage/edit-tool';
 import GarageView from '../main/garage/garage-view';
 import Modal from '../main/winners/winner-modal';
-import { createWinner, deleteCar, editWinner, getCars, getWinners, switchCarEngine } from '../../utils/api';
+import {
+  createWinner,
+  deleteCar,
+  deleteWinner,
+  editWinner,
+  getCars,
+  getWinners,
+  switchCarEngine,
+} from '../../utils/api';
+
+// type driveResponse = {
+//   status: true | false;
+// };
 
 type EngineResponse = {
   velocity: number;
@@ -47,14 +59,28 @@ export default class Car {
     this.deleteButton.setCallback(async () => {
       await deleteCar(this.id);
       await this.garage.setButtonsStatus();
+      const { winners } = await getWinners();
+      const exWinner = winners.find((winner) => winner.id === this.id);
+      if (exWinner) await deleteWinner(this.id);
       await this.renderCars();
     });
     this.selectButton.setCallback(() => {
       Storage.editCarId = this.id;
       this.editTool.editSelectHandler(this.name, this.color);
     });
-    this.startButton.setCallback(this.startCar.bind(this));
-    this.stopButton.setCallback(this.stopEngine.bind(this));
+    this.startButton.setCallback(async () => {
+      // this.stopButton.getElement().disabled = false;
+      // this.startButton.getElement().disabled = true;
+      this.soloRaceButtonsDisable();
+      await this.startCar();
+    });
+    this.stopButton.setCallback(async () => {
+      await this.stopEngine();
+      // this.stopButton.getElement().disabled = true;
+      // this.startButton.getElement().disabled = false;
+      this.soloRaceButtonsEnable();
+    });
+    this.stopButton.getElement().disabled = true;
   }
 
   startRace(speeds: number[]) {
@@ -86,8 +112,13 @@ export default class Car {
   }
 
   async startCar() {
-    const speed = await this.startEngine();
-    this.setAnimationCar(speed, 'forwards', 'linear', 'solo');
+    try {
+      const speed = await this.startEngine();
+      this.setAnimationCar(speed, 'forwards', 'linear', 'solo');
+      await switchCarEngine(this.id, 'drive');
+    } catch (error) {
+      this.carFailRace();
+    }
   }
 
   startCarRace(speed: number) {
@@ -99,22 +130,7 @@ export default class Car {
     this.carImage.style.animationFillMode = `${mode}`;
     this.carImage.style.animationTimingFunction = `${timingFunc}`;
     this.carImage.style.animationName = `${name}`;
-  }
-
-  disableCarButtons() {
-    this.stopButton.getElement().disabled = true;
-    this.selectButton.getElement().disabled = true;
-    this.deleteButton.getElement().disabled = true;
-    this.startButton.getElement().disabled = true;
-    this.stopButton.getElement().disabled = true;
-  }
-
-  enableCarButtons() {
-    this.stopButton.getElement().disabled = false;
-    this.selectButton.getElement().disabled = false;
-    this.deleteButton.getElement().disabled = false;
-    this.startButton.getElement().disabled = false;
-    this.stopButton.getElement().disabled = false;
+    this.carImage.style.animationPlayState = 'running';
   }
 
   getCarContainer(id: number, name: string, color: string): HTMLElement {
@@ -133,7 +149,8 @@ export default class Car {
     const carTitle = new ComponentCreator('car__title', 'h3').getElement();
     carTitle.textContent = name;
     const carView = new ComponentCreator('car__view').getElement();
-    carView.append(carTitle, this.carImage);
+    const carFlag = new ComponentCreator('car__flag').getElement();
+    carView.append(carTitle, this.carImage, carFlag);
     container.append(buttons, carView);
     return container;
   }
@@ -144,6 +161,7 @@ export default class Car {
     this.garage.title.textContent = `Garage (${totalCars})`;
     this.garage.pagesCount.textContent = `Page #${Storage.currentGaragePage}`;
     this.cars = [];
+    Storage.isAnimationEnd = false;
     cars.forEach((car) => {
       const carEl = new Car(this.editTool, this.garage);
       this.cars.push(carEl);
@@ -154,21 +172,44 @@ export default class Car {
   setWinners(modal: Modal) {
     this.carImage.addEventListener('animationend', async (event) => {
       if (!Storage.isAnimationEnd && event.animationName === 'race') {
+        Storage.isAnimationEnd = true;
         modal.setContent(this.name, this.time);
         modal.openModal();
         await this.setUp(this.id);
-        Storage.isAnimationEnd = true;
       }
     });
   }
 
   async setUp(id: number) {
-    const winners = await getWinners();
+    const { winners } = await getWinners();
     const exWinner = winners.find((winner) => winner.id === id);
     if (exWinner) {
-      await editWinner(exWinner.wins + 1, this.time, id);
+      const besTime = exWinner.time > this.time ? this.time : exWinner.time;
+      await editWinner(exWinner.wins + 1, besTime, id);
     } else {
       await createWinner(this.id, this.winsCounter, this.time);
     }
+  }
+
+  soloRaceButtonsDisable() {
+    this.stopButton.getElement().disabled = false;
+    this.startButton.getElement().disabled = true;
+  }
+
+  soloRaceButtonsEnable() {
+    this.stopButton.getElement().disabled = true;
+    this.startButton.getElement().disabled = false;
+  }
+  raceButtonsDisable() {
+    this.startButton.getElement().disabled = true;
+    this.stopButton.getElement().disabled = true;
+    this.selectButton.getElement().disabled = true;
+    this.deleteButton.getElement().disabled = true;
+  }
+  raceButtonsEnable() {
+    this.startButton.getElement().disabled = false;
+    this.stopButton.getElement().disabled = true;
+    this.selectButton.getElement().disabled = false;
+    this.deleteButton.getElement().disabled = false;
   }
 }

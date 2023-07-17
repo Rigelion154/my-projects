@@ -12,11 +12,6 @@ type WinResponse = {
   time: number;
 };
 
-// type EngineResponse = {
-//   velocity: number;
-//   distance: number;
-// };
-
 const BASE_URL = 'http://127.0.0.1:3000';
 const PATH = {
   garage: '/garage',
@@ -51,6 +46,14 @@ async function createWinner(id: number, wins: number, time: number) {
   });
 }
 
+async function getCarById(id: number) {
+  const garage = await fetch(`${BASE_URL}${PATH.garage}/${id}`, {
+    method: 'GET',
+  });
+  const car: CarResponse = await garage.json();
+  return car;
+}
+
 async function getCars() {
   const garage = await fetch(
     `${BASE_URL}${PATH.garage}?_page=${Storage.currentGaragePage}&_limit=${Storage.maxGaragePageItem}`
@@ -64,8 +67,9 @@ async function getWinners() {
   const garage = await fetch(
     `${BASE_URL}${PATH.winners}?_page=${Storage.currentWinnersPage}&_limit=${Storage.maxWinnersPageItem}`
   );
-  const cars: WinResponse[] = await garage.json();
-  return cars;
+  const winners: WinResponse[] = await garage.json();
+  const totalWinners = garage.headers.get('X-Total-Count');
+  return { winners, totalWinners };
 }
 
 async function editCar(name: string, color: string, id: number) {
@@ -94,6 +98,14 @@ async function editWinner(wins: number, time: number, id: number) {
   });
 }
 
+async function deleteCar(id: number) {
+  await fetch(`${BASE_URL}${PATH.garage}/${id}`, { method: 'DELETE' });
+}
+
+async function deleteWinner(id: number) {
+  await fetch(`${BASE_URL}${PATH.winners}/${id}`, { method: 'DELETE' });
+}
+
 async function switchCarEngine(id: number, status: string) {
   const engine = await fetch(`${BASE_URL}${PATH.engine}?id=${id}&status=${status}`, {
     method: 'PATCH',
@@ -101,8 +113,15 @@ async function switchCarEngine(id: number, status: string) {
   return engine.json();
 }
 
-async function deleteCar(id: number) {
-  await fetch(`${BASE_URL}${PATH.garage}/${id}`, { method: 'DELETE' });
-}
-
-export { createCar, createWinner, getCars, getWinners, deleteCar, editCar, editWinner, switchCarEngine };
+export {
+  createCar,
+  createWinner,
+  getCarById,
+  getCars,
+  getWinners,
+  deleteCar,
+  deleteWinner,
+  editCar,
+  editWinner,
+  switchCarEngine,
+};
