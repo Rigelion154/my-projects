@@ -65,7 +65,16 @@ async function getCars() {
 
 async function getWinners() {
   const garage = await fetch(
-    `${BASE_URL}${PATH.winners}?_page=${Storage.currentWinnersPage}&_limit=${Storage.maxWinnersPageItem}`
+    `${BASE_URL}${PATH.winners}?_page=${Storage.currentWinnersPage}&_limit=${Storage.maxWinnersPageItem}&_sort=time&_order=ASC`
+  );
+  const winners: WinResponse[] = await garage.json();
+  const totalWinners = garage.headers.get('X-Total-Count');
+  return { winners, totalWinners };
+}
+
+async function sortWinners(sort: string, order: string) {
+  const garage = await fetch(
+    `${BASE_URL}${PATH.winners}?_page=${Storage.currentWinnersPage}&_limit=${Storage.maxWinnersPageItem}&_sort=${sort}&_order=${order}`
   );
   const winners: WinResponse[] = await garage.json();
   const totalWinners = garage.headers.get('X-Total-Count');
@@ -119,6 +128,7 @@ export {
   getCarById,
   getCars,
   getWinners,
+  sortWinners,
   deleteCar,
   deleteWinner,
   editCar,

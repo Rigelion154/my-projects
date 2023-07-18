@@ -23,14 +23,14 @@ export default class Pagination {
     if (Storage.currentWinnersPage < (await Storage.getWinnersMaxPages())) {
       Storage.currentWinnersPage += 1;
       await winners.setButtonsStatus();
-      await winners.renderWinners();
+      await winners.renderWinners(winners.sort, winners.order);
     }
   }
   async prevWinnersButtonHandler(car: Car, winners: WinnersView) {
     if (Storage.currentWinnersPage > 1) {
       Storage.currentWinnersPage -= 1;
       await winners.setButtonsStatus();
-      await winners.renderWinners();
+      await winners.renderWinners(winners.sort, winners.order);
     }
   }
 }

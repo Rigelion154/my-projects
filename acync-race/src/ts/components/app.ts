@@ -53,7 +53,7 @@ export default class App {
       this.garage.getElement().style.display = 'none';
       this.winners.getElement().style.display = 'flex';
       await this.winners.setButtonsStatus();
-      await this.winners.renderWinners();
+      await this.winners.renderWinners(this.winners.sort, this.winners.order);
     });
   }
 

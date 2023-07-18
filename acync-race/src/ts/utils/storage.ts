@@ -5,6 +5,8 @@ type Winner = {
 };
 
 export default class Storage {
+  static order = 'ASC';
+  static sort = 'time';
   static editCarId = 0;
   static currentGaragePage = 1;
   static currentWinnersPage = 1;
