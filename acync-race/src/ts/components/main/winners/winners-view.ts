@@ -2,7 +2,7 @@ import ComponentCreator from '../../../utils/component-creator';
 import ButtonComponentCreator from '../../../utils/button-component-creator';
 import Storage from '../../../utils/storage';
 import getCarImage from '../../../utils/get-car-image';
-import { getCarById, getWinners, sortWinners } from '../../../utils/api';
+import { getCarById, sortWinners } from '../../../utils/api';
 
 const cssClasses = {
   WINNERS: 'winners winners__container',
