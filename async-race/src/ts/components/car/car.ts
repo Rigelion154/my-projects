@@ -15,10 +15,6 @@ import {
   switchCarEngine,
 } from '../../utils/api';
 
-// type driveResponse = {
-//   status: true | false;
-// };
-
 type EngineResponse = {
   velocity: number;
   distance: number;
@@ -69,15 +65,11 @@ export default class Car {
       this.editTool.editSelectHandler(this.name, this.color);
     });
     this.startButton.setCallback(async () => {
-      // this.stopButton.getElement().disabled = false;
-      // this.startButton.getElement().disabled = true;
       this.soloRaceButtonsDisable();
       await this.startCar();
     });
     this.stopButton.setCallback(async () => {
       await this.stopEngine();
-      // this.stopButton.getElement().disabled = true;
-      // this.startButton.getElement().disabled = false;
       this.soloRaceButtonsEnable();
     });
     this.stopButton.getElement().disabled = true;

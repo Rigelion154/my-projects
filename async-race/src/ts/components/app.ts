@@ -131,7 +131,7 @@ export default class App {
           car.raceButtonsEnable();
         })
       );
-      this.raceButtonsEnable();
+      await this.raceButtonsEnable();
       Storage.isAnimationEnd = false;
     });
   }
@@ -156,7 +156,7 @@ export default class App {
     this.garage.prevButton.disabled = true;
   }
 
-  raceButtonsEnable() {
+  async raceButtonsEnable() {
     this.header.garageButton.getElement().disabled = false;
     this.header.winnersButton.getElement().disabled = false;
     this.createTool.createButton.getElement().disabled = false;
@@ -164,7 +164,6 @@ export default class App {
     this.garage.generateButton.getElement().disabled = false;
     this.editTool.editButton.disabled = false;
     this.garage.raceButton.disabled = false;
-    this.garage.nextButton.disabled = false;
-    this.garage.prevButton.disabled = false;
+    await this.garage.setButtonsStatus();
   }
 }
